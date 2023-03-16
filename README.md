@@ -13,3 +13,4 @@ Tehtävä 11 - [gitlog.txt](https://github.com/cameocami/ot-harjoitustyo/blob/ma
 
 Tähän viikon 2 laskarit.
 
+Lisäys paikallisessa repossa.
