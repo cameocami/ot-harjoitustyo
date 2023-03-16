@@ -4,10 +4,10 @@
 
 Tähän kuvaus projektista ja tarvittaessa **lihavoitua** tai *kursivoitua* tekstiä. 
 
-### Muu otskikko
+### Tehtävä 1
 
-Otsikon alle tekstiä.
+[komentorivi.txt](https://github.com/cameocami/ot-harjoitustyo/blob/main/laskarit/komentorivi.txt)
 
-### Kolmas otsikko
+### Tehtävä 11
 
-Otsikon alle tekstiä. 
+[gitlog.txt](https://github.com/cameocami/ot-harjoitustyo/blob/main/laskarit/gitlog.txt)
