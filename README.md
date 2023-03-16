@@ -5,7 +5,5 @@
 Tähän kuvaus projektista ja tarvittaessa **lihavoitua** tai *kursivoitua* tekstiä. 
 
 ### Viikko 1
-##### Tehtävä 1
-[komentorivi.txt](https://github.com/cameocami/ot-harjoitustyo/blob/main/laskarit/komentorivi.txt)
-##### Tehtävä 11
-[gitlog.txt](https://github.com/cameocami/ot-harjoitustyo/blob/main/laskarit/gitlog.txt)
+Tehtävä 1 - [komentorivi.txt](https://github.com/cameocami/ot-harjoitustyo/blob/main/laskarit/komentorivi.txt)
+Tehtävä 11 - [gitlog.txt](https://github.com/cameocami/ot-harjoitustyo/blob/main/laskarit/gitlog.txt)
