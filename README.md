@@ -4,7 +4,7 @@ Sovelluksen avulla käyttäjä voi luoda valmiin kauppalistan ruokakaupan tuotte
 
 ### Dokumentaatio
 
-- [Käyttöohje] (./dokumentaatio/kayttoohje.md)
+- [Käyttöohje](./dokumentaatio/kayttoohje.md)
 - [Vaatimusmäärittely](./dokumentaatio/vaatimusmaarittely.md)
 - [Arkkitehtuurikuvaus](./dokumentaatio/arkkitehtuuri.md)
 - [Testausdokumentti](./dokumentaatio/testaus.md)
