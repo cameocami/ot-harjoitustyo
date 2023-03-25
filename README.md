@@ -2,7 +2,7 @@
 
 Sovelluksen avulla käyttäjä voi luoda valmiin kauppalistan ruokakaupan tuotteista.   
 
-### Dokumentaatio
+## Dokumentaatio
 
 - [Käyttöohje](./dokumentaatio/kayttoohje.md)
 - [Vaatimusmäärittely](./dokumentaatio/vaatimusmaarittely.md)
@@ -12,14 +12,18 @@ Sovelluksen avulla käyttäjä voi luoda valmiin kauppalistan ruokakaupan tuotte
 - [Changelog](./dokumentaatio/changelog.md)
 
 
-### Laskuharjoitukset
+## Laskuharjoitukset
 
-#### Viikko 1
+### Viikko 1
+
 Tehtävä 1 - [komentorivi.txt](./laskarit/komentorivi.txt)
 
 Tehtävä 11 - [gitlog.txt](./laskarit/gitlog.txt)
 
-#### Viikko 2
+### Viikko 2
 
 Tehtävä 9 - [Testikattavuus raportti](./laskarit/viikko2/Screenshot%20from%202023-03-23%2019-03-33.png)
 
+Harjoitustyö 1 - [Alustava määrittelydokumentti](./dokumentaatio/vaatimusmaarittely.md)
+
+Harjoitustyö 2 - [Työaikakirjanpito](./dokumentaatio/tuntikirjanpito.md)
