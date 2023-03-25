@@ -1,15 +1,25 @@
-# Ohjelmointitekniikka-kurssin harjoitustyö
+# Kauppalista app 
 
-### Projekti lyhyesti
+Sovelluksen avulla käyttäjä voi luoda valmiin kauppalistan ruokakaupan tuotteista.   
 
-Tähän kuvaus projektista ja tarvittaessa **lihavoitua** tai *kursivoitua* tekstiä. 
+### Dokumentaatio
 
-### Viikko 1
-Tehtävä 1 - [komentorivi.txt](https://github.com/cameocami/ot-harjoitustyo/blob/main/laskarit/komentorivi.txt)
+- [Käyttöohje] (./dokumentaatio/kayttoohje.md)
+- [Vaatimusmäärittely](./dokumentaatio/vaatimusmaarittely.md)
+- [Arkkitehtuurikuvaus](./dokumentaatio/arkkitehtuuri.md)
+- [Testausdokumentti](./dokumentaatio/testaus.md)
+- [Työaikakirjanpito](./dokumentaatio/tuntikirjanpito.md)
+- [Changelog](./dokumentaatio/changelog.md)
 
-Tehtävä 11 - [gitlog.txt](https://github.com/cameocami/ot-harjoitustyo/blob/main/laskarit/gitlog.txt)
 
-### Viikko 2
+### Laskuharjoitukset
 
-Tehtävä 9 - [Testikattavuus raportti](https://github.com/cameocami/ot-harjoitustyo/blob/main/laskarit/viikko2/Screenshot%20from%202023-03-23%2019-03-33.png)
+#### Viikko 1
+Tehtävä 1 - [komentorivi.txt](./laskarit/komentorivi.txt)
+
+Tehtävä 11 - [gitlog.txt](./laskarit/gitlog.txt)
+
+#### Viikko 2
+
+Tehtävä 9 - [Testikattavuus raportti](./laskarit/viikko2/Screenshot%20from%202023-03-23%2019-03-33.png)
 
