@@ -67,8 +67,8 @@
       class Katu {
            nimi
            omistaja
-           talojen_määrä
-           hotellien_määrä
+           talot
+           hotelli
           
       }
       
