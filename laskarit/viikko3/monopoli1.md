@@ -2,14 +2,35 @@
 
 ```mermaid
  classDiagram
-      Todo "*" --> "1" User
-      class User{
-          username
-          password
+      Pelaaja "1" -- "1" Pelinappula
+      Pelaaja "2" ..> Noppa
+      
+      Pelinappula "0-8" -- "1" Ruutu
+      Pelinappula ..> Ruutu
+      
+      Pelilauta "40" -- Ruutu
+      
+      
+      
+      class Noppa {
+      silmäluku
+      
       }
-      class Todo{
-          id
-          content
-          done
+      
+      class Pelaaja {
+          nimi
+          heitä_noppaa()
+      }
+      
+      class Pelinappula {
+          sijainti
+          siirrä_nappulaa()
+      }
+      
+      class Ruutu {
+          seuraava_ruutu
+      }
+      
+      class Pelilauta {
       }
 ```
