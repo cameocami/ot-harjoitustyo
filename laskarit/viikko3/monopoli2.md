@@ -19,8 +19,8 @@
       Sattuma_tai_yhteismaa ..> Kortti
       
       Katu "0-1" -- Pelaaja
-      Katu "0-4" -- Talo
-      Katu "0-1" -- Hotelli
+      Katu "0-4" -- "1" Talo
+      Katu "0-1" -- "1" Hotelli
       
       
       
