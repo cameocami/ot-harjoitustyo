@@ -33,7 +33,7 @@ Kun käyttäjä on valmis kauppalistan kanssa, "laadi kauppalista"-painike kokoa
 
 ## Jatkokehitysideoita
 
-Perusversion jälkeen järjestelmää täydennetään ajan salliessa esim. seuraavilla toiminnallisuuksilla:
+Perusversion jälkeen sovellusta voidaan täydentää esim. seuraavilla toiminnallisuuksilla, mikäli aika sallii:
 
 - Kauppalistan tyhjennys - käyttäjä voi poistaa kaikki tuotteet kauppalistalta.
 - Kauppalistan järjestely - käyttäjä voi valita minkä perusteella tuotteet järjestellään kauppalistaan.
