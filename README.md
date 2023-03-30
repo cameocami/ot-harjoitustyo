@@ -27,3 +27,14 @@ Tehtävä 9 - [Testikattavuus raportti](./laskarit/viikko2/Screenshot%20from%202
 Harjoitustyö 1 - [Alustava määrittelydokumentti](./dokumentaatio/vaatimusmaarittely.md)
 
 Harjoitustyö 2 - [Työaikakirjanpito](./dokumentaatio/tuntikirjanpito.md)
+
+### Viikko 3
+
+Tehtävä 1 - [Monopoli](./laskarit/viikko3/monopoli1.md)
+
+Tehtävä 2 - [Laajennettu Monopoli](./laskarit/viikko3/monopoli2.md)
+
+Tehtävä 3 - [Sekvenssikaavio](./laskarit/viikko3/sekvenssikaavio1.md)
+
+Tehtävä 4 - [Laajempi Sekvenssikaavio](./laskarit/viikko3/sekvenssikaavio2.md)
+
