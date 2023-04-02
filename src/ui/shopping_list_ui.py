@@ -25,8 +25,11 @@ class Main_View:
     # Options menu
 
     def _form_options_menu(self):
-        compile_shopping_list_button = ttk.Button(master=self._options_menu, text="Laadi kauppalista", command=shopping_list_service.compile_shopping_list())
+        compile_shopping_list_button = ttk.Button(master=self._options_menu, text="Laadi kauppalista", command=self._compile_shopping_list_button_handler())
         compile_shopping_list_button.grid(row=0, column=0, padx=5, pady=5, sticky=constants.E)
+
+    def _compile_shopping_list_button_handler(self):
+        shopping_list_service.compile_shopping_list()
 
     # Current shopping list
 
@@ -46,11 +49,9 @@ class Main_View:
     # Enter products menu
     
     def _form_enter_items_menu(self):
-        product_inputs = self._form_entry_bar()
-        department_input = self._form_departments_tab()
 
+        # entry frame
 
-    def _form_entry_bar(self):
         entry_frame = ttk.Frame(master=self._enter_items_menu)
 
         text = StringVar()
@@ -61,27 +62,26 @@ class Main_View:
         amount_entry = ttk.Entry(master=entry_frame, textvariable=amount)
         amount_entry.grid(row=0, column=1)
 
-        unit_options = ["kpl", "kpl", "ml", "l", "g","kg"]
         unit = StringVar()
+        unit_options = ["kpl", "kpl", "ml", "l", "g","kg"]
         unit_option = ttk.OptionMenu(entry_frame, unit, *unit_options)
         unit_option.grid(row=0, column=2)
 
+        search_product_button = ttk.Button(entry_frame, text="Etsi", command=self._search_product_button_handler(text.get(), amount.get(), unit.get()))
+        search_product_button.grid(row=0, column=3)
+        
         entry_frame.pack()
 
-        return [text, amount, unit]
+        # departments frame
 
-    def _form_departments_tab(self):
         departments_frame = ttk.Frame(master=self._enter_items_menu)
 
-        
-
         chosen_department = IntVar()
-        chosen_department.set(0)
+
+        departments = sorted(shopping_list_service.get_department_order_in_store(), key=lambda x: str(x))
         position = 0
         grid_row = 0
         grid_column = 0
-
-        departments = sorted(shopping_list_service.get_department_order_in_store(), key=lambda x: str(x))
 
         for department in departments:
             department_selection = Radiobutton(departments_frame, text=department,indicatoron=0, variable=chosen_department, value=position)
@@ -92,6 +92,22 @@ class Main_View:
                 grid_row -= 7
                 grid_column += 1
 
+        chosen_department.set(0)
+
         departments_frame.pack()
 
-        return chosen_department.get()
+        # add product -button frame
+
+        button_frame = ttk.Frame(master=self._enter_items_menu)
+
+        add_product_button = ttk.Button(button_frame, text="Lisää", command=self._add_product_button_handler(text.get(), amount.get(), unit.get()))
+        add_product_button.grid(sticky=constants.E)
+
+        button_frame.pack()
+        
+
+    def _search_product_button_handler(self, product_entry: str, amount_entry: str, unit_option: str):
+        pass
+
+    def _add_product_button_handler(self, product_entry: str, amount_entry: str, unit_option: str):
+        pass

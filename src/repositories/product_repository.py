@@ -7,7 +7,7 @@ class ProductRepository:
     def __init__(self):
         self._products = []
 
-    def get_product_repository(self):
+    def get_products(self):
         return self._products 
     
     def pull_database(self):
