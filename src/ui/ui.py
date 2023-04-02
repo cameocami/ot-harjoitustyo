@@ -8,11 +8,9 @@ class UI:
         self._root = root
 
     def display(self):
-        list_frame = List_frame(self._root)
-        enter_items_frame = Enter_items_frame(self._root)
+        main_view = Main_view(self._root)
 
-        list_frame.pack()
-        enter_items_frame.pack()
+        main_view.pack()
 
 
 

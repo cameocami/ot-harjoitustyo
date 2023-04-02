@@ -9,7 +9,7 @@ class Shopping_list_service:
         self._current_shopping_list = {}       
 
     def get_current_shopping_list(self):
-        return self._current_shopping_list
+        return self._current_shopping_list 
     
     def find_product_department(self, product_name: str, amount: int, unit: str):
         for product in self._product_repository:
@@ -32,6 +32,18 @@ class Shopping_list_service:
                 "kg": 0,
                 }
         self._current_shopping_list[product][unit] += amount
+
+    def compile_shopping_list(self):
+        with open("kauppalista.txt", "w") as shopping_list_file:
+            for product, amounts in self._current_shopping_list.items():
+                row = product.name + amounts
+                shopping_list_file.write(row+"\n")
+    
+
+
+
+            
+
 
     
 shopping_list_service = Shopping_list_service()
