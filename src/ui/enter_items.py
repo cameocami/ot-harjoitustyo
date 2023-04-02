@@ -5,11 +5,11 @@ class Enter_items_frame:
         self._root = root
         self._frame = ttk.Frame(master=self._root)
 
-        self._entry = ttk.Entry(master=self._root)
+        self._entry = ttk.Entry(master=self._frame)
         self._entry.pack()
 
         button = ttk.Button(
-          master=self._root,
+          master=self._frame,
           text="Lisää",
           command=self._handle_button_click
         )
