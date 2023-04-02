@@ -10,6 +10,18 @@ class Main_View:
         self._current_shopping_list = ttk.Frame(master=self._root)
         self._enter_items_menu = ttk.Frame(master=self._root)
 
+
+    def display(self):
+        self._form_options_menu()
+        self._options_menu.pack()
+
+        self._form_current_shopping_list()
+        self._current_shopping_list.pack()
+
+        self._form_enter_items_menu()
+        self._enter_items_menu.pack()
+
+
     # Options menu
 
     def _form_options_menu(self):
@@ -51,26 +63,8 @@ class Main_View:
 
         entry_frame.pack()
 
-
-        
-        
-
-
-
-
-
-
-                
-
-
-
-    def pack(self):
-        self._options_menu.pack()
-        self._current_shopping_list.pack()
-        self._enter_items_menu.pack()
-
             
-
+"""
 class Enter_items_frame:
     def __init__(self, root):
         self._root = root
@@ -93,5 +87,4 @@ class Enter_items_frame:
             
     def pack(self):
         self._frame.pack()
-
-
+"""

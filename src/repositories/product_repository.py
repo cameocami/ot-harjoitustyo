@@ -1,13 +1,14 @@
 
 import csv
 from entities.product import Product
-
+from entities.department import Department
 
 class ProductRepository:
     def __init__(self):
         self._products = []
 
-        
+    def get_product_repository(self):
+        return self._products 
     
     def pull_database(self):
         with open("products.cvs") as product_file:
@@ -25,6 +26,4 @@ class ProductRepository:
         self._products.append(product)
         with open("products.cvs", 'a') as product_file:
             product_file.write(f'{product.name};{product.department}\n')
-    
-
     

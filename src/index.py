@@ -1,12 +1,12 @@
 from tkinter import Tk
-from ui.ui import UI
+from ui.shopping_list_ui import Main_View
 
 
 def main():
     window = Tk()
     window.title("Kauppalista")
 
-    ui_view = UI(window)
+    ui_view = Main_View(window)
     ui_view.display()
 
     window.mainloop()
