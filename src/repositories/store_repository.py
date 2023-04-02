@@ -10,6 +10,7 @@ class StoreRepository:
         
         self.pull_database()
 
+
     def get_store_repository(self):
         return self._stores
     

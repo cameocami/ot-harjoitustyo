@@ -2,20 +2,21 @@ from entities.department import Department
 from entities.product import Product
 from entities.store import Store
 from repositories.product_repository import product_repository
-from repositories.store_repository import store_repository
+from repositories.store_repository import StoreRepository
 
 class Shopping_list_service:
 
     def __init__(self):
         self._product_repository = product_repository
         self._current_shopping_list = {}
-        self._store = store_repository.get_store("oletuskauppa")
+        self._store_repository = StoreRepository()
+        self._store = self._store_repository.get_store("oletuskauppa")
 
     def get_current_shopping_list(self):
         return self._current_shopping_list
     
     def get_department_order_in_store(self):
-        pass
+        return self._store.get_department_order_in_store()
     
     def find_product_department(self, product_name: str, amount: int, unit: str):
         for product in self._product_repository:
@@ -41,7 +42,7 @@ class Shopping_list_service:
 
     def compile_shopping_list(self):
         with open("kauppalista.txt", "w") as shopping_list_file:
-            for department in self._store:
+            for department in self._store.get_department_order_in_store():
                 shopping_list_file.write(f'{department}\n')
                 for product, amounts in self._current_shopping_list.items():
                     if product.department == department:

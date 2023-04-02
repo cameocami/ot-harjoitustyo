@@ -7,7 +7,7 @@ class Product:
         self.department = department
 
     def __repr__(self):
-        text = f'{self.name[0].upper()}{self.name[1:]}'
+        text = f'{self.name.capitalize()}'
         return text
 
 

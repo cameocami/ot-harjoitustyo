@@ -1,4 +1,4 @@
-from tkinter import Tk, ttk, constants, StringVar
+from tkinter import Tk, ttk, constants, StringVar, IntVar, Radiobutton
 
 from services.shopping_list_services import shopping_list_service
 
@@ -46,6 +46,11 @@ class Main_View:
     # Enter products menu
     
     def _form_enter_items_menu(self):
+        product_inputs = self._form_entry_bar()
+        department_input = self._form_departments_tab()
+
+
+    def _form_entry_bar(self):
         entry_frame = ttk.Frame(master=self._enter_items_menu)
 
         text = StringVar()
@@ -63,28 +68,30 @@ class Main_View:
 
         entry_frame.pack()
 
-            
-"""
-class Enter_items_frame:
-    def __init__(self, root):
-        self._root = root
-        self._frame = ttk.Frame(master=self._root)
+        return [text, amount, unit]
 
-        self._entry = ttk.Entry(master=self._frame)
-        self._entry.pack()
+    def _form_departments_tab(self):
+        departments_frame = ttk.Frame(master=self._enter_items_menu)
 
-        button = ttk.Button(
-          master=self._frame,
-          text="Lisää",
-          command=self._handle_button_click
-        )
+        
 
-        button.pack()
+        chosen_department = IntVar()
+        chosen_department.set(0)
+        position = 0
+        grid_row = 0
+        grid_column = 0
 
-    def _handle_button_click(self):
-        entry_value = self._entry.get()
-        print(f"Tuote on: {entry_value}")
-            
-    def pack(self):
-        self._frame.pack()
-"""
+        departments = sorted(shopping_list_service.get_department_order_in_store(), key=lambda x: str(x))
+
+        for department in departments:
+            department_selection = Radiobutton(departments_frame, text=department,indicatoron=0, variable=chosen_department, value=position)
+            department_selection.grid(row=grid_row, column = grid_column)
+            position += 1
+            grid_row += 1
+            if grid_row % 7 == 0:
+                grid_row -= 7
+                grid_column += 1
+
+        departments_frame.pack()
+
+        return chosen_department.get()

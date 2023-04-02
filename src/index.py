@@ -3,6 +3,7 @@ from ui.shopping_list_ui import Main_View
 
 
 def main():
+
     window = Tk()
     window.title("Kauppalista")
 
