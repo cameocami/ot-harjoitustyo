@@ -1,10 +1,14 @@
 from tkinter import Tk, ttk, constants, StringVar, IntVar, Radiobutton
 
-from services.shopping_list_services import shopping_list_service
+from services.shopping_list_services import Shopping_list_service
+from repositories.product_repository import ProductRepository
+from repositories.store_repository import StoreRepository
+
 
 
 class Main_View:
     def __init__(self, root):
+        self._shopping_list_service = Shopping_list_service(ProductRepository(), StoreRepository())
         self._root = root
         self._options_menu = ttk.Frame(master=self._root)
         self._current_shopping_list = ttk.Frame(master=self._root)
@@ -29,12 +33,12 @@ class Main_View:
         compile_shopping_list_button.grid(row=0, column=0, padx=5, pady=5, sticky=constants.E)
 
     def _compile_shopping_list_button_handler(self):
-        shopping_list_service.compile_shopping_list()
+        self._shopping_list_service.compile_shopping_list()
 
     # Current shopping list
 
     def _form_current_shopping_list(self):
-        for product, amounts in shopping_list_service.get_current_shopping_list():
+        for product, amounts in self._shopping_list_service.get_current_shopping_list():
             product_frame = ttk.Frame(master=self._current_shopping_list)
             product_label = ttk.Label(master=product_frame, text=product.name)
             product_label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
@@ -78,7 +82,7 @@ class Main_View:
 
         chosen_department = IntVar()
 
-        departments = sorted(shopping_list_service.get_department_order_in_store(), key=lambda x: str(x))
+        departments = sorted(self._shopping_list_service.get_department_order_in_store(), key=lambda x: str(x))
         position = 0
         grid_row = 0
         grid_column = 0
