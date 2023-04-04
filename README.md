@@ -38,3 +38,4 @@ Tehtävä 3 - [Sekvenssikaavio](./laskarit/viikko3/sekvenssikaavio1.md)
 
 Tehtävä 4 - [Laajempi Sekvenssikaavio](./laskarit/viikko3/sekvenssikaavio2.md)
 
+Harjoitustyö - [Ensimmäiset testit](.dokumentaatio/kuvat/Screenshot from 2023-04-04 23-44-37.png]
