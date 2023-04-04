@@ -7,4 +7,4 @@
 | 2.4. | 7    | Alustava tietokannan käsittely csv-tiedostona, toiminnallisuuksien luonti, käyttöliittymän luonnin harjoittelua  |
 | 2.4. | 6    | Toiminnallisuuksien yhdistämistä käyttöliittymään  |
 | 4.4. | 1    | Ensimmäisten testien luonti  |
-| yht   | 23    | | 
+| yht   | 24    | | 
