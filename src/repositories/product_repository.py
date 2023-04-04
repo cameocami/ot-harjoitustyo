@@ -26,5 +26,3 @@ class ProductRepository:
         self._products.append(product)
         with open("products.cvs", 'a') as product_file:
             product_file.write(f'{product.name};{product.department}\n')
-    
-product_repository = ProductRepository()

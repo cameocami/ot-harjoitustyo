@@ -1,15 +1,15 @@
 from entities.department import Department
 from entities.product import Product
 from entities.store import Store
-from repositories.product_repository import product_repository
+from repositories.product_repository import ProductRepository
 from repositories.store_repository import StoreRepository
 
 class Shopping_list_service:
 
-    def __init__(self):
+    def __init__(self, product_repository: "ProductRepository", store_repository: "StoreRepository"):
         self._product_repository = product_repository
         self._current_shopping_list = {}
-        self._store_repository = StoreRepository()
+        self._store_repository = store_repository
         self._store = self._store_repository.get_store("oletuskauppa")
 
     def get_current_shopping_list(self):
@@ -53,10 +53,3 @@ class Shopping_list_service:
         store = store_repository.get_store(store_name)
         self._store = store
 
-
-
-            
-
-
-    
-shopping_list_service = Shopping_list_service()

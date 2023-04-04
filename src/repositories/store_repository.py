@@ -36,5 +36,3 @@ class StoreRepository:
             if store_name == store.name:
                 return store
         return self._stores[0]
-
-store_repository = StoreRepository()
