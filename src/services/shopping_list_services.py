@@ -4,6 +4,7 @@ from entities.store import Store
 from repositories.product_repository import ProductRepository
 from repositories.store_repository import StoreRepository
 
+
 class Shopping_list_service:
 
     def __init__(self, product_repository: "ProductRepository", store_repository: "StoreRepository"):
@@ -14,10 +15,10 @@ class Shopping_list_service:
 
     def get_current_shopping_list(self):
         return self._current_shopping_list
-    
+
     def get_department_order_in_store(self):
         return self._store.get_department_order_in_store()
-    
+
     def find_product_department(self, product_name: str):
         for product in self._product_repository.get_products():
             if product.name == product_name.lower():
@@ -37,7 +38,7 @@ class Shopping_list_service:
                 "l": 0,
                 "g": 0,
                 "kg": 0,
-                }
+            }
         self._current_shopping_list[product][unit] += amount
 
     def compile_shopping_list(self):
@@ -48,8 +49,7 @@ class Shopping_list_service:
                     if product.department == department:
                         row = product.name + amounts
                         shopping_list_file.write(row+"\n")
-    
+
     def change_store(self, store_name):
         store = store_repository.get_store(store_name)
         self._store = store
-

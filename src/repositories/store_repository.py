@@ -6,14 +6,13 @@ from entities.product import Product
 
 class StoreRepository:
     def __init__(self):
-        self._stores= []
-        
-        self.pull_database()
+        self._stores = []
 
+        self.pull_database()
 
     def get_store_repository(self):
         return self._stores
-    
+
     def pull_database(self):
         with open("stores.cvs") as store_file:
             for row in csv.reader(store_file, delimiter=";"):
@@ -22,7 +21,7 @@ class StoreRepository:
                 for department_name in row[1:]:
                     departments.append(Department(department_name))
                 self._stores.append(Store(name, departments))
-    
+
     def save_to_database(self):
         with open("stores.cvs", 'w') as store_file:
             for store in self._stores:
@@ -30,7 +29,7 @@ class StoreRepository:
                 for department in store.departments:
                     store_file.write(f';{department}')
                 store_file.write("\n")
-    
+
     def get_store(self, store_name: str):
         for store in self._stores:
             if store_name == store.name:

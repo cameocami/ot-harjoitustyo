@@ -9,6 +9,3 @@ class Product:
     def __repr__(self):
         text = f'{self.name.capitalize()}'
         return text
-
-
-
