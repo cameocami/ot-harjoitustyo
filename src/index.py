@@ -7,7 +7,7 @@ def main():
     window = Tk()
     window.title("Kauppalista")
 
-    ui_view = Main_View(window)
+    ui_view = MainView(window)
     ui_view.display()
 
     window.mainloop()

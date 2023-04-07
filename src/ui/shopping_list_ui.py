@@ -1,40 +1,32 @@
 from tkinter import Tk, ttk, constants, StringVar, IntVar, Radiobutton
 
-from services.shopping_list_services import Shopping_list_service
+from services.shopping_list_services import ShoppingListService
 from repositories.product_repository import ProductRepository
 from repositories.store_repository import StoreRepository
 
+from ui.options_frame import OptionsMenu
 
-class Main_View:
+
+class MainView:
     def __init__(self, root):
-        self._shopping_list_service = Shopping_list_service(
+        self._shopping_list_service = ShoppingListService(
             ProductRepository(), StoreRepository())
-        self._root = root
-        self._options_menu = ttk.Frame(master=self._root)
+
         self._current_shopping_list = ttk.Frame(master=self._root)
-        self._enter_items_menu = ttk.Frame(master=self._root)
+        self._enter_items_frame = ttk.Frame(master=self._root)
+
+        self._root = root
+        self._options_frame = OptionsFrame(self._root, self._shopping_list_service)
 
     def display(self):
-        self._form_options_menu()
-        self._options_menu.pack()
+        self._options_frame.pack()
 
         self._form_current_shopping_list()
         self._current_shopping_list.pack()
 
         self._form_enter_items_menu()
         self._enter_items_menu.pack()
-
-    # Options menu
-
-    def _form_options_menu(self):
-        compile_shopping_list_button = ttk.Button(
-            master=self._options_menu, text="Laadi kauppalista", command=self._compile_shopping_list_button_handler())
-        compile_shopping_list_button.grid(
-            row=0, column=0, padx=5, pady=5, sticky=constants.E)
-
-    def _compile_shopping_list_button_handler(self):
-        self._shopping_list_service.compile_shopping_list()
-
+    
     # Current shopping list
 
     def _form_current_shopping_list(self):

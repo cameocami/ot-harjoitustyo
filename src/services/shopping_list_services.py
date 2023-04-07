@@ -1,13 +1,12 @@
 from entities.department import Department
 from entities.product import Product
-from entities.store import Store
 from repositories.product_repository import ProductRepository
 from repositories.store_repository import StoreRepository
 
 
-class Shopping_list_service:
+class ShoppingListService:
 
-    def __init__(self, product_repository: "ProductRepository", store_repository: "StoreRepository"):
+    def __init__(self, product_repository: ProductRepository, store_repository: StoreRepository):
         self._product_repository = product_repository
         self._current_shopping_list = {}
         self._store_repository = store_repository
@@ -31,7 +30,7 @@ class Shopping_list_service:
         return product
 
     def add_product_to_current_shopping_list(self, product: "Product", amount: int, unit: str):
-        if product not in self._current_shopping_list.keys():
+        if product not in self._current_shopping_list:
             self._current_shopping_list[product] = {
                 "kpl": 0,
                 "ml": 0,
@@ -42,7 +41,7 @@ class Shopping_list_service:
         self._current_shopping_list[product][unit] += amount
 
     def compile_shopping_list(self):
-        with open("kauppalista.txt", "w") as shopping_list_file:
+        with open("kauppalista.txt", mode="w", encoding="utf-8") as shopping_list_file:
             for department in self._store.get_department_order_in_store():
                 shopping_list_file.write(f'{department}\n')
                 for product, amounts in self._current_shopping_list.items():
@@ -51,5 +50,5 @@ class Shopping_list_service:
                         shopping_list_file.write(row+"\n")
 
     def change_store(self, store_name):
-        store = store_repository.get_store(store_name)
+        store = self._store_repository.get_store(store_name)
         self._store = store

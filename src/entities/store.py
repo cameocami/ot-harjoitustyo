@@ -4,7 +4,7 @@ class Store:
         self.departments = departments
 
     def get_department_order_in_store(self):
-        return [department for department in self.departments]
+        return self.departments
 
     def rearrange_departments(self):
         pass
