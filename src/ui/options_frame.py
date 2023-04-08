@@ -13,5 +13,8 @@ class OptionsFrame:
     def pack(self):
         self._frame.pack()
 
+    def destroy(self):
+        self._frame.destroy()
+
     def _compile_shopping_list_button_handler(self):
         self._shopping_list_service.compile_shopping_list()

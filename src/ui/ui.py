@@ -12,14 +12,23 @@ class MainView:
     def __init__(self, root):
         self._shopping_list_service = ShoppingListService(
             ProductRepository(), StoreRepository())
-        self._root = root   
+        self._root = root
+        self._options_frame = None
+        self._shopping_list_frame = None
+        self._enter_items_frame = None
 
     def display(self):
-        options_frame = OptionsFrame(self._root, self._shopping_list_service)
-        options_frame.pack()
+        if self._options_frame:
+            self._option_frame.destroy()
+        self._options_frame = OptionsFrame(self._root, self._shopping_list_service)
+        self._options_frame.pack()
 
-        shopping_list_frame = ShoppingListFrame(self._root, self._shopping_list_service)
-        shopping_list_frame.pack()
+        if self._shopping_list_frame:
+            self._shopping_list_frame.destroy()
+        self._shopping_list_frame = ShoppingListFrame(self._root, self._shopping_list_service)
+        self._shopping_list_frame.pack()
 
-        enter_items_frame = EnterItemsFrame(self._root, self._shopping_list_service)
-        enter_items_frame.pack()
+        if self._enter_items_frame:
+            self._enter_items_frame.destroy()
+        self._enter_items_frame = EnterItemsFrame(self._root, self._shopping_list_service)
+        self._enter_items_frame.pack()

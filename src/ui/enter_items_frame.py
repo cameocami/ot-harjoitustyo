@@ -1,5 +1,6 @@
 from tkinter import Tk, ttk, constants, StringVar, IntVar, Radiobutton
 from services.shopping_list_services import ShoppingListService
+from entities.product import Product
 
 class EnterItemsFrame:
     def __init__(self, root, shopping_list_service: ShoppingListService):
@@ -64,38 +65,57 @@ class EnterItemsFrame:
 
     def pack(self):
         self._frame.pack()
+    
+    def destroy(self):
+        self._frame.destroy()
 
 
     def _search_product_button_handler(self):
         product_entry = self._entry_text.get()
         if not self._check_product_entry_validity(product_entry):
             raise ValueError("Product name input incorrect")
-        product_department = self._shopping_list_service.find_product_department(product_entry)
-        if product_department:
-            for department in self._departments:
-                if department.name == product_department:
-                    radiobutton_pos = self._departments.index(department)
-                    self._radiobutton_department.set(radiobutton_pos)
+        product = self._shopping_list_service.find_product(product_entry)
+        if product:
+            radiobutton_pos = self._find_selection_from_department(product.department)
+            self._radiobutton_department.set(radiobutton_pos)
+        print(self._shopping_list_service.get_current_shopping_list())
 
     def _add_product_button_handler(self):
         product_entry = self._entry_text.get()
-        amount_entry = self._amount_entry.get()
-        unit_option = self._unit_option.get()
+        amount_entry = self._entry_amount.get()
+        unit_option = self._option_unit.get()
+        department_selection = self._radiobutton_department.get()
 
         if not self._check_product_entry_validity(product_entry):
             raise ValueError("Product name input incorrect")
         if not self._check_amount_entry_validity(amount_entry):
             raise ValueError("Amount input incorrect")
+        if not self._check_department_selection_validity(department_selection):
+            raise ValueError("Department not chosen")
 
-        product_entry
-
+        product = self._shopping_list_service.find_product(product_entry)
         amount_entry = int(amount_entry)
-
-        
-        self._shopping_list_service.add_product_to_current_shopping_list(product, amount, unit)
+        if product:     
+            self._shopping_list_service.add_product_to_current_shopping_list(product, amount_entry, unit_option)
+        else:
+            department = self._find_department_from_selection(department_selection)
+            product = Product(product_entry, department)
+            self._shopping_list_service.add_product_to_current_shopping_list(product, amount_entry, unit_option)            
 
     def _check_product_entry_validity(self, product_entry):
         return True
     
     def _check_amount_entry_validity(self, amount_entry):
         return True
+
+    def _check_department_selection_validity(self, department_selection):
+        return True
+
+    def _find_department_from_selection(self, department_selection):
+        print(self._departments[department_selection])
+        return self._departments[department_selection]
+
+    def _find_selection_from_department(self, department_name):
+        for department in self._departments:
+            if department.name == department_name:
+                return self._departments.index(department)

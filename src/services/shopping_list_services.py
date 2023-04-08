@@ -18,10 +18,10 @@ class ShoppingListService:
     def get_department_order_in_store(self):
         return self._store.get_department_order_in_store()
 
-    def find_product_department(self, product_name: str):
+    def find_product(self, product_name: str):
         for product in self._product_repository.get_products():
             if product.name == product_name.lower():
-                return product.department
+                return product
         return None
 
     def create_new_product(self, product_name: str, department: "Department"):

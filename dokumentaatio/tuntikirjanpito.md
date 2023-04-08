@@ -7,4 +7,6 @@
 | 2.4. | 7    | Alustava tietokannan käsittely csv-tiedostona, toiminnallisuuksien luonti, käyttöliittymän luonnin harjoittelua  |
 | 2.4. | 6    | Toiminnallisuuksien yhdistämistä käyttöliittymään  |
 | 4.4. | 1    | Ensimmäisten testien luonti  |
-| yht   | 24    | | 
+| 7.4. | 3    | Pylint korjauksia, käyttöliittymän jakaminen eri luokkiin |
+| 8.4. | 2    | Käyttöliittymän jakamista eri luokkiin |
+| yht   | 29    | | 
