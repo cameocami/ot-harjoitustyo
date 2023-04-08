@@ -14,7 +14,7 @@ class EnterItemsFrame:
         self._entry_text = StringVar()
         self._product_entry = ttk.Entry(master=self._entry_frame, textvariable=self._entry_text)
         self._product_entry.grid(row=0, column=0)
-        self._entry_text.set("Lisää tuote kauppalistalle")
+        # self._entry_text.set("Lisää tuote kauppalistalle")
 
         self._entry_amount = StringVar()
         self._amount_entry = ttk.Entry(master=self._entry_frame, textvariable=self._entry_amount)
