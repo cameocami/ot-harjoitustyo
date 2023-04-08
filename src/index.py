@@ -1,5 +1,5 @@
 from tkinter import Tk
-from ui.shopping_list_ui import Main_View
+from ui.ui import MainView
 
 
 def main():

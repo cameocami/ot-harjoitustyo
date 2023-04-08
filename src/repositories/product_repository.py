@@ -6,6 +6,7 @@ from entities.product import Product
 class ProductRepository:
     def __init__(self):
         self._products = []
+        self.pull_database()
 
     def get_products(self):
         return self._products
