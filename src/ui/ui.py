@@ -18,12 +18,13 @@ class MainView:
         self._enter_items_frame = None
 
     def display(self):
-
+        
         self._options_frame = OptionsFrame(self._root, self._shopping_list_service)
         self._options_frame.pack()
+
 
         self._shopping_list_frame = ShoppingListFrame(self._root, self._shopping_list_service)
         self._shopping_list_frame.pack()
 
-        self._enter_items_frame = EnterItemsFrame(self._root, self._shopping_list_service)
+        self._enter_items_frame = EnterItemsFrame(self._root, self._shopping_list_service, self._shopping_list_frame.pack)
         self._enter_items_frame.pack()

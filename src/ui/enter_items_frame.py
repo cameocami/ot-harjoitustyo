@@ -3,9 +3,12 @@ from services.shopping_list_services import ShoppingListService
 from entities.product import Product
 
 class EnterItemsFrame:
-    def __init__(self, root, shopping_list_service: ShoppingListService):
+    def __init__(self, root, shopping_list_service: ShoppingListService, display_shopping_list_changes):
         self._shopping_list_service = shopping_list_service
         self._frame = ttk.Frame(master=root)
+        self._display_shopping_list_changes = display_shopping_list_changes
+
+    def pack(self):
 
         # Entry frame
 
@@ -63,7 +66,6 @@ class EnterItemsFrame:
 
         self._add_button_frame.pack()
 
-    def pack(self):
         self._frame.pack()
     
     def destroy(self):
@@ -78,7 +80,8 @@ class EnterItemsFrame:
         if product:
             radiobutton_pos = self._find_selection_from_department(product.department)
             self._radiobutton_department.set(radiobutton_pos)
-        print(self._shopping_list_service.get_current_shopping_list())
+        else:
+            self._radiobutton_department.set(None)
 
     def _add_product_button_handler(self):
         product_entry = self._entry_text.get()
@@ -99,8 +102,15 @@ class EnterItemsFrame:
             self._shopping_list_service.add_product_to_current_shopping_list(product, amount_entry, unit_option)
         else:
             department = self._find_department_from_selection(department_selection)
-            product = Product(product_entry, department)
-            self._shopping_list_service.add_product_to_current_shopping_list(product, amount_entry, unit_option)            
+            product = self._shopping_list_service.create_new_product(product_entry, department)
+            self._shopping_list_service.add_product_to_current_shopping_list(product, amount_entry, unit_option)      
+
+        self._display_shopping_list_changes()
+        self._entry_text.set("")
+        self._entry_amount.set("")
+        self._option_unit.set("kpl")
+        self._radiobutton_department.set(None)
+
 
     def _check_product_entry_validity(self, product_entry):
         return True
@@ -112,7 +122,6 @@ class EnterItemsFrame:
         return True
 
     def _find_department_from_selection(self, department_selection):
-        print(self._departments[department_selection])
         return self._departments[department_selection]
 
     def _find_selection_from_department(self, department_name):
