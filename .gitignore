@@ -4,3 +4,4 @@ coverage
 .coveragerc
 htmlcov
 .pytest_cache
+kauppalista.txt
