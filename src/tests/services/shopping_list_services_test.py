@@ -28,7 +28,7 @@ class FakeStoreRepository:
         self._stores = [Store("oletuskauppa", [
             Department("hevi"),
             Department("leipä"),
-            Department("maito")])]
+            Department("maito")]), Store("Alepa Kamppi", [Department("hevi"), Department("valmisruoka"), Department("makeiset")])]
 
     def get_store(self, store_name: str):
         for store in self._stores:
@@ -77,7 +77,7 @@ class TestShoppingListService(unittest.TestCase):
         self.assertEqual(product.name, "paahtoleipä")
         self.assertEqual(product.department.name, "leipä")
 
-    def test_add_product_to_current_shopping_list(self):
+    def test_add_new_product_to_current_shopping_list(self):
         product = Product("ruokakerma", Department("maito"))
         self.shopping_list_service.add_product_to_current_shopping_list(product, 200, "ml")
 
@@ -88,4 +88,19 @@ class TestShoppingListService(unittest.TestCase):
         self.assertEqual(self.shopping_list_service.get_current_shopping_list()[product]["g"], 0)
         self.assertEqual(self.shopping_list_service.get_current_shopping_list()[product]["kg"], 0)
 
+    def test_add_to_existing_product_to_current_shopping_list(self):
+        product = Product("ruokakerma", Department("maito"))
+        self.shopping_list_service.add_product_to_current_shopping_list(product, 200, "ml")
+        self.shopping_list_service.add_product_to_current_shopping_list(product, 1, "kpl")
 
+        self.assertEqual(list(self.shopping_list_service.get_current_shopping_list().keys()), [product])
+        self.assertEqual(self.shopping_list_service.get_current_shopping_list()[product]["kpl"], 1)
+        self.assertEqual(self.shopping_list_service.get_current_shopping_list()[product]["ml"], 200)
+        self.assertEqual(self.shopping_list_service.get_current_shopping_list()[product]["l"], 0)
+        self.assertEqual(self.shopping_list_service.get_current_shopping_list()[product]["g"], 0)
+        self.assertEqual(self.shopping_list_service.get_current_shopping_list()[product]["kg"], 0)
+
+    def test_change_store(self):
+        self.shopping_list_service.change_store("Alepa Kamppi")
+
+        self.assertEqual(self.shopping_list_service._store.name, "Alepa Kamppi")
