@@ -9,4 +9,5 @@
 | 4.4.  | 1    | Ensimmäisten testien luonti  |
 | 7.4.  | 3    | Pylint korjauksia, käyttöliittymän jakaminen eri luokkiin |
 | 8.4.  | 3    | Käyttöliittymän jakamista eri luokkiin, ruudun päivittymiseen liittyvät korjaukset  |
-| yht   | 30   | | 
+| 18.4.  | 3    | Sovelluslogiikan testausta ja pakkauskaavion luonti  |
+| yht   | 33   | | 
