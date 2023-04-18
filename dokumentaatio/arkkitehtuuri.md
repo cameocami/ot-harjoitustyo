@@ -2,6 +2,7 @@
 
 ### Rakenne
 
+![Pakkausrakenne](./kuvat/pakkauskaavio.png)
 
 ### Käyttöliittymä
 
