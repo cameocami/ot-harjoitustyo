@@ -13,7 +13,8 @@
 - Käyttäjä voi lisätä tuotteita sekä tietokantaan että kauppalistalle
 - Käyttäjä näkee kauppalistalle lisätyt tuotteet
 - Käyttäjä voi päivittää kauppalista-tekstitiedoston kauppalistan tuotteilla, osastojärjestyksessä
-- 
+- Testattu, että ShoppingListService-luokka löytää tuotteet tietokannasta, osaa luoda uuden tuotteen, osaa lisätä tuotteita tämän hetkiselle kauppalistalle ja osaa vaihtaa kauppaa. 
+
 ## Viikko 5
 
 ## Viikko 6
