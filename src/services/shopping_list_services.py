@@ -1,4 +1,4 @@
-from entities.product import Product
+
 from repositories.product_repository import ProductRepository
 from repositories.store_repository import StoreRepository
 
@@ -24,8 +24,8 @@ class ShoppingListService:
         return None
 
     def create_new_product(self, product_name: str, department: "Department"):
-        product = Product(product_name, department)
-        self._product_repository.add_product(product)
+        product = self._product_repository.add_product(
+            product_name, department)
         return product
 
     def add_product_to_current_shopping_list(self, product: "Product", amount: int, unit: str):

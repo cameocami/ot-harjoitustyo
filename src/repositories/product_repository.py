@@ -23,7 +23,9 @@ class ProductRepository:
             for product in self._products:
                 product_file.write(f'{product.name};{product.department}\n')
 
-    def add_product(self, product: 'Product'):
+    def add_product(self, product_name: str, department: "Department"):
+        product = Product(product_name, department)
         self._products.append(product)
         with open('products.cvs', mode='a', encoding='UTF-8') as product_file:
             product_file.write(f'{product.name};{product.department}\n')
+        return product
