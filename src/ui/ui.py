@@ -8,6 +8,7 @@ from ui.options_frame import OptionsFrame
 from ui.shopping_list_frame import ShoppingListFrame
 from ui.enter_items_frame import EnterItemsFrame
 
+
 class MainView:
     def __init__(self, root):
         self._shopping_list_service = ShoppingListService(
@@ -18,13 +19,15 @@ class MainView:
         self._enter_items_frame = None
 
     def display(self):
-        
-        self._options_frame = OptionsFrame(self._root, self._shopping_list_service)
+
+        self._options_frame = OptionsFrame(
+            self._root, self._shopping_list_service)
         self._options_frame.pack()
 
-
-        self._shopping_list_frame = ShoppingListFrame(self._root, self._shopping_list_service)
+        self._shopping_list_frame = ShoppingListFrame(
+            self._root, self._shopping_list_service)
         self._shopping_list_frame.pack()
 
-        self._enter_items_frame = EnterItemsFrame(self._root, self._shopping_list_service, self._shopping_list_frame.pack)
+        self._enter_items_frame = EnterItemsFrame(
+            self._root, self._shopping_list_service, self._shopping_list_frame.pack)
         self._enter_items_frame.pack()

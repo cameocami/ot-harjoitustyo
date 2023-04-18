@@ -1,6 +1,7 @@
 from tkinter import ttk, constants
 from services.shopping_list_services import ShoppingListService
 
+
 class OptionsFrame:
     def __init__(self, root, shopping_list_service):
         self._shopping_list_service = shopping_list_service

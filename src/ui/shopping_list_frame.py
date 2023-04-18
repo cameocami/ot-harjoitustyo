@@ -1,6 +1,7 @@
 from tkinter import ttk, constants
 from services.shopping_list_services import ShoppingListService
 
+
 class ShoppingListFrame:
     def __init__(self, root, shopping_list_service: ShoppingListService):
         self._shopping_list_service = shopping_list_service
@@ -30,4 +31,3 @@ class ShoppingListFrame:
 
     def destroy(self):
         self._frame.destroy()
-
