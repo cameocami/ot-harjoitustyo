@@ -1,4 +1,3 @@
-from entities.department import Department
 from entities.product import Product
 from repositories.product_repository import ProductRepository
 from repositories.store_repository import StoreRepository
