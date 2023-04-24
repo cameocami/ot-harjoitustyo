@@ -7,19 +7,24 @@ class EnterItemsFrame:
     def __init__(self, root, shopping_list_service: ShoppingListService, display_shopping_list_changes):
         self._shopping_list_service = shopping_list_service
         self._frame = ttk.Frame(master=root)
+        self._product_suggestions = []
         self._display_shopping_list_changes = display_shopping_list_changes
 
     def pack(self):
+        self._pack_entry_frame()
+        self._pack_departments_frame()
+        self._pack_add_product_button_frame()
+        self._pack_suggestions_frame()
+        self._frame.pack()
 
-        # Entry frame
-
+    def _pack_entry_frame(self):
         self._entry_frame = ttk.Frame(master=self._frame)
 
         self._entry_text = StringVar()
         self._product_entry = ttk.Entry(
             master=self._entry_frame, textvariable=self._entry_text)
         self._product_entry.grid(row=0, column=0)
-        # self._entry_text.set("Lisää tuote kauppalistalle")
+        # self._product_entry.insert(0, "Lisää tuote kauppalistalle")
 
         self._entry_amount = StringVar()
         self._amount_entry = ttk.Entry(
@@ -39,8 +44,7 @@ class EnterItemsFrame:
 
         self._entry_frame.pack()
 
-        # Departments frame
-
+    def _pack_departments_frame(self):
         self._departments_frame = ttk.Frame(master=self._frame)
 
         self._radiobutton_department = IntVar()
@@ -62,8 +66,7 @@ class EnterItemsFrame:
 
         self._departments_frame.pack()
 
-        # Add product -button frame
-
+    def _pack_add_product_button_frame(self):
         self._add_button_frame = ttk.Frame(master=self._frame)
 
         self._add_product_button = ttk.Button(
@@ -72,22 +75,41 @@ class EnterItemsFrame:
 
         self._add_button_frame.pack()
 
-        self._frame.pack()
+    def _pack_suggestions_frame(self):
+
+        self._suggestions_frame = ttk.Frame(master=self._frame)
+
+        for product in self._product_suggestions:
+            product_label = ttk.Label(
+                master=self._suggestions_frame, text=product)
+            product_label.pack()
+
+        self._suggestions_frame.pack()
 
     def destroy(self):
         self._frame.destroy()
 
     def _search_product_button_handler(self):
         product_entry = self._entry_text.get()
+        self._product_suggestions = []
         if not self._check_product_entry_validity(product_entry):
             raise ValueError("Product name input incorrect")
-        product = self._shopping_list_service.find_product(product_entry)
-        if product:
+        product_suggestion = self._shopping_list_service.find_product(
+            product_entry)
+        if product_suggestion[0]:
+            product = product_suggestion[1]
             radiobutton_pos = self._find_selection_from_department(
                 product.department)
             self._radiobutton_department.set(radiobutton_pos)
+            self._product_suggestions.append("Tuote löytyi!")
         else:
+            self._product_suggestions = product_suggestion[1]
+            self._product_suggestions.insert(
+                0, "Tuotetta ei löytynyt. Tarkoititko jotain seuraavista?")
             self._radiobutton_department.set(None)
+
+        self._suggestions_frame.destroy()
+        self._pack_suggestions_frame()
 
     def _add_product_button_handler(self):
         product_entry = self._entry_text.get()
@@ -102,24 +124,26 @@ class EnterItemsFrame:
         if not self._check_department_selection_validity(department_selection):
             raise ValueError("Department not chosen")
 
-        product = self._shopping_list_service.find_product(product_entry)
         amount_entry = int(amount_entry)
-        if product:
-            self._shopping_list_service.add_product_to_current_shopping_list(
-                product, amount_entry, unit_option)
+        product_suggestion = self._shopping_list_service.find_product(
+            product_entry)
+        if product_suggestion[0]:
+            product = product_suggestion[1]
         else:
             department = self._find_department_from_selection(
                 department_selection)
             product = self._shopping_list_service.create_new_product(
                 product_entry, department)
-            self._shopping_list_service.add_product_to_current_shopping_list(
-                product, amount_entry, unit_option)
+        self._shopping_list_service.add_product_to_current_shopping_list(
+            product, amount_entry, unit_option)
 
         self._display_shopping_list_changes()
         self._entry_text.set("")
         self._entry_amount.set("")
         self._option_unit.set("kpl")
         self._radiobutton_department.set(None)
+        self._product_suggestions = []
+        self._suggestions_frame.destroy()
 
     def _check_product_entry_validity(self, product_entry):
         return True
@@ -135,5 +159,5 @@ class EnterItemsFrame:
 
     def _find_selection_from_department(self, department_name):
         for department in self._departments:
-            if department.name == department_name:
+            if department.name.lower() == department_name.lower():
                 return self._departments.index(department)

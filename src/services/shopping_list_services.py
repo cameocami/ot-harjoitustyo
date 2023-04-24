@@ -17,11 +17,23 @@ class ShoppingListService:
     def get_department_order_in_store(self):
         return self._store.get_department_order_in_store()
 
-    def find_product(self, product_name: str):
+    def find_product(self, product_entry: str):
+        suggestions = []
+        product_entry = product_entry.lower()
         for product in self._product_repository.get_products():
-            if product.name == product_name.lower():
-                return product
-        return None
+            if product.name == product_entry:
+                return (True, product)
+            if product_entry in product.name:
+                suggestions.append(product)
+            elif product.name in product_entry:
+                suggestions.append(product)
+            else:
+                for i in range(len(product_entry)):
+                    suggestion = product_entry[:i] + product_entry[i+1:]
+                    if product.name == suggestion:
+                        suggestions.append(product)
+                        break
+        return (False, suggestions)
 
     def create_new_product(self, product_name: str, department: "Department"):
         product = self._product_repository.add_product(
