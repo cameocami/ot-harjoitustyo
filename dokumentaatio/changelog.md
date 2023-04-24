@@ -17,6 +17,9 @@
 
 ## Viikko 5
 
+- Jos käyttäjä etsii tuottetta nimen perusteella, eikä täysin saman nimistä tuotetta löydy, sovellus ehdottaa tuotteita, joiden kirjoitusasu on lähellä
+
+
 ## Viikko 6
 
 
