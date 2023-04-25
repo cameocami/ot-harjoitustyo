@@ -7,7 +7,7 @@ Sovelluksen avulla käyttäjä voi luoda itselleen kauppalistan ruokakaupan tuot
 
 ## Käyttöliittymäluonnos (osin tehty)
 
-Käyttöliittymä koostuu yhdestä näkymästä, johon sovellus aukeaa, kun se käynnistetään. Kyseinen näkymä sisältää kaikki sovelluksen toiminnalisuudet. (tehty)
+Käyttöliittymä koostuu yhdestä näkymästä, johon sovellus aukeaa, kun se käynnistetään. (tehty) Kyseinen näkymä sisältää kaikki sovelluksen toiminnalisuudet. (tehty)
 
 
 ![](./kuvat/kayttoliittyma-hahmotelma.png)
