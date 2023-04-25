@@ -82,7 +82,8 @@ class TestShoppingListService(unittest.TestCase):
         self.assertEqual(product_suggestions[1][2].name, "omenarahka")
 
     def test_find_product_with_overextended_entry(self):
-        product_suggestions = self.shopping_list_service.find_product("granny smith omena")
+        product_suggestions = self.shopping_list_service.find_product(
+            "granny smith omena")
 
         self.assertEqual(product_suggestions[0], False)
         self.assertEqual(len(product_suggestions[1]), 1)
@@ -108,7 +109,7 @@ class TestShoppingListService(unittest.TestCase):
         self.assertEqual(product_suggestions[0], False)
         self.assertEqual(len(product_suggestions[1]), 1)
         self.assertEqual(product_suggestions[1][0].name, "omena")
-     
+
     def test_find_product_with_one_character_misspelt(self):
         product_suggestions = self.shopping_list_service.find_product("omina")
 
@@ -123,7 +124,8 @@ class TestShoppingListService(unittest.TestCase):
         self.assertEqual(len(product_suggestions[1]), 10)
 
     def test_find_product_when_no_suggestions(self):
-        product_suggestions = self.shopping_list_service.find_product("selleri")
+        product_suggestions = self.shopping_list_service.find_product(
+            "selleri")
 
         self.assertEqual(product_suggestions, (False, []))
 
