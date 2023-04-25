@@ -17,8 +17,12 @@
 
 ## Viikko 5
 
-- Jos käyttäjä etsii tuottetta nimen perusteella, eikä täysin saman nimistä tuotetta löydy, sovellus ehdottaa tuotteita, joiden kirjoitusasu on lähellä
-
+- Kun käyttäjä etsii tuottetta nimen perusteella, eikä täysin saman nimistä tuotetta löydy, sovellus ehdottaa käyttäjälle:
+  -  Tuotteita, joiden nimessä on yksi kirjain enemmän kuin hakusanassa
+  -  Tuotteita, joiden nimessä on yksi kirjain vähemmän kuin hakusanassa
+  -  Tuotteita, joiden nimessä on yksi kirjain on eri kuin hakusanassa
+  -  Tuotteita, joiden nimessä hakusana esiintyy
+  -  Tuotteita, joiden nimi esiintyy hakusanassa
 
 ## Viikko 6
 
