@@ -5,7 +5,7 @@
 Sovelluksen avulla käyttäjä voi luoda itselleen kauppalistan ruokakaupan tuotteista. 
 
 
-## Käyttöliittymäluonnos
+## Käyttöliittymäluonnos (osin tehty)
 
 Käyttöliittymä koostuu yhdestä näkymästä, johon sovellus aukeaa, kun se käynnistetään. Kyseinen näkymä sisältää kaikki sovelluksen toiminnalisuudet. (tehty)
 
@@ -27,7 +27,7 @@ Käyttäjä lisää tuotteen kauppalistalle painamalla "lisää"-painiketta. (te
 
 Kun tuotteita on lisätty kauppalistalle, voi käyttäjä vielä muokata haluttua määrää. Painamalla "-" tai "+" -painikkeita, käyttäjä pystyy vähentämään tai lisäämään haluttua tuotteen määrää. Painamalla "poista"-painiketta, käyttäjä voi poistaa tuotteen kauppalistalta. 
 
-### Kauppalista tiedosto kokoaminen
+### Kauppalista tiedosto kokoaminen (osin tehty)
 
 Kun käyttäjä on valmis kauppalistan kanssa, "laadi kauppalista"-painike kokoaa listan tuotteet html-tiedostoon. (osin tehty, tiedosto toteutettu txt-tiedostona)
 
