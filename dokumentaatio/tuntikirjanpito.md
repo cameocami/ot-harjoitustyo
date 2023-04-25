@@ -11,5 +11,5 @@
 | 8.4.  | 3    | Käyttöliittymän jakamista eri luokkiin, ruudun päivittymiseen liittyvät korjaukset  |
 | 18.4.  | 3    | Sovelluslogiikan testausta ja pakkauskaavion luonti  |
 | 24.4.  | 4    | Haku toiminnon laajentaminen  |
-| 25.4.  | 5    | Testit haku toiminnon laajennukseen  |
-| yht   | 37   | | 
+| 25.4.  | 1    | Testit haku toiminnon laajennukseen  |
+| yht   | 38   | | 
