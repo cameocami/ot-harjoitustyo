@@ -27,12 +27,27 @@ class ShoppingListService:
                 suggestions.append(product)
             elif product.name in product_entry:
                 suggestions.append(product)
-            else:
+            elif len(product_entry) > len(product.name):
                 for i in range(len(product_entry)):
                     suggestion = product_entry[:i] + product_entry[i+1:]
                     if product.name == suggestion:
                         suggestions.append(product)
                         break
+            elif len(product_entry) < len(product.name):
+                for i in range(len(product.name)):
+                    product_misspelling = product.name[:i] + product.name[i+1:]
+                    if product_misspelling == product_entry:
+                        suggestions.append(product)
+                        break
+            elif len(product_entry) == len(product.name):
+                for i in range(len(product.name)):
+                    product_misspelling = product.name[:i] + product.name[i+1:]
+                    suggestion = product_entry[:i] + product_entry[i+1:]
+                    if product_misspelling == suggestion:
+                        suggestions.append(product)
+                        break
+            if len(suggestions) > 9:
+                break
         return (False, suggestions)
 
     def create_new_product(self, product_name: str, department: "Department"):
