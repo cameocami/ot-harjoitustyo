@@ -3,12 +3,26 @@ from services.shopping_list_services import ShoppingListService
 
 
 class ShoppingListFrame:
+    """Class responsible for Tkinter-frame of with a view of the current shopping list.
+    
+    Attributes:
+        shopping_list_service: service class that controls the application logic
+        frame: the master frame of the Tkinter-window into which the user interface is initialized
+        current_shopping_list_frame: Tkinter-frame for the view of the current shopping list
+    """
     def __init__(self, root, shopping_list_service: ShoppingListService):
+        """Class constructor. 
+
+        Args:
+            root (Tk): original Tkinter-window into which the user interface is initialized
+            shopping_list_service (ShoppingListService): service class that controls the application logic
+        """
         self._shopping_list_service = shopping_list_service
         self._frame = ttk.Frame(master=root)
         self._current_shopping_list_frame = None
 
     def pack(self):
+        """Recreates the elements in the shopping list frame and displays them."""
         if self._current_shopping_list_frame:
             self._current_shopping_list_frame.destroy()
         self._current_shopping_list_frame = ttk.Frame(self._frame)
@@ -30,4 +44,5 @@ class ShoppingListFrame:
         self._frame.pack()
 
     def destroy(self):
+        """Destroys the frame"""
         self._frame.destroy()

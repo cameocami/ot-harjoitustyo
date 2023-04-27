@@ -9,7 +9,8 @@ except FileNotFoundError:
     pass
 
 PRODUCT_REPOSITORY = os.getenv("PRODUCT_REPOSITORY") or "products.csv"
-PRODUCT_REPOSITORY_PATH = os.path.join(dirname, "..", "data", PRODUCT_REPOSITORY)
+PRODUCT_REPOSITORY_PATH = os.path.join(
+    dirname, "..", "data", PRODUCT_REPOSITORY)
 
 STORE_REPOSITORY = os.getenv("STORE_REPOSITORY") or "stores.csv"
 STORE_REPOSITORY_PATH = os.path.join(dirname, "..", "data", STORE_REPOSITORY)

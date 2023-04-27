@@ -8,6 +8,7 @@ class Product:
             name (str): product name
             department (Department): department in which product is found
     """
+
     def __init__(self, name: str, department: Department):
         """Class constructor, that creates a new product 
         Args:

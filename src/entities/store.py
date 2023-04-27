@@ -5,7 +5,7 @@ class Store:
             name (str): store name
             departments (list): list of departments in the order which they appear in the store
     """
-    
+
     def __init__(self, name: str, departments: list):
         """Class constructor.
 

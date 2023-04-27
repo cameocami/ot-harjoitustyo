@@ -4,6 +4,25 @@ from entities.product import Product
 
 
 class EnterItemsFrame:
+    """Class responsible for Tkinter-frame with options for searching for products and adding them to shopping list
+    
+    Attributes:
+        shopping_list_service: service class that controls the application logic
+        frame: the master frame of the Tkinter-window into which the user interface is initialized
+        product_suggestions: list of product suggestions for last entry
+        display_shopping_list_changes: MainView method to display the changes in a different frame (the shopping list frame)
+
+        entry_frame: subframe for elements related to typing the product name, entering the amounts and searching for department of the product
+        entry_text: Tkinter-stringvariable for entered product name
+        entry_amount: Tkinter stringvariable for entered amount
+        option_unit: Tkinter stringvariable for chosen unit type
+
+        departments_frame: subframe for elements for displaying all departments available and chosing the desired department
+        radiobutton_department: Tkinter-integervariable for chosen department
+
+        add_button_frame: subframe for elements for adding product to shopping list and product repository
+
+    """
     def __init__(self, root, shopping_list_service: ShoppingListService, display_shopping_list_changes):
         self._shopping_list_service = shopping_list_service
         self._frame = ttk.Frame(master=root)
@@ -21,26 +40,22 @@ class EnterItemsFrame:
         self._entry_frame = ttk.Frame(master=self._frame)
 
         self._entry_text = StringVar()
-        self._product_entry = ttk.Entry(
-            master=self._entry_frame, textvariable=self._entry_text)
-        self._product_entry.grid(row=0, column=0)
+        product_entry = ttk.Entry(master=self._entry_frame, textvariable=self._entry_text)
+        product_entry.grid(row=0, column=0)
         # self._product_entry.insert(0, "Lisää tuote kauppalistalle")
 
         self._entry_amount = StringVar()
-        self._amount_entry = ttk.Entry(
-            master=self._entry_frame, textvariable=self._entry_amount)
-        self._amount_entry.grid(row=0, column=1)
+        amount_entry = ttk.Entry(master=self._entry_frame, textvariable=self._entry_amount)
+        amount_entry.grid(row=0, column=1)
         self._entry_amount.set(0)
 
         self._option_unit = StringVar()
         unit_options = ["kpl", "ml", "l", "g", "kg"]
-        self._unit_option = ttk.OptionMenu(
-            self._entry_frame, self._option_unit, unit_options[0], *unit_options)
-        self._unit_option.grid(row=0, column=2)
+        unit_option = ttk.OptionMenu(self._entry_frame, self._option_unit, unit_options[0], *unit_options)
+        unit_option.grid(row=0, column=2)
 
-        self._search_product_button = ttk.Button(
-            master=self._entry_frame, text="Etsi", command=self._search_product_button_handler)
-        self._search_product_button.grid(row=0, column=3)
+        search_product_button = ttk.Button(master=self._entry_frame, text="Etsi", command=self._search_product_button_handler)
+        search_product_button.grid(row=0, column=3)
 
         self._entry_frame.pack()
 
@@ -49,12 +64,11 @@ class EnterItemsFrame:
 
         self._radiobutton_department = IntVar()
         self._radiobutton_department.set(None)
-        self._departments = sorted(
-            self._shopping_list_service.get_department_order_in_store(), key=lambda x: str(x))
+        departments = sorted(self._shopping_list_service.get_department_order_in_store(), key=lambda x: str(x))
         position = 0
         grid_row = 0
         grid_column = 0
-        for department in self._departments:
+        for department in departments:
             department_selection = Radiobutton(
                 master=self._departments_frame, text=department, indicatoron=0, variable=self._radiobutton_department, value=position)
             department_selection.grid(row=grid_row, column=grid_column)
@@ -155,9 +169,11 @@ class EnterItemsFrame:
         return True
 
     def _find_department_from_selection(self, department_selection):
-        return self._departments[department_selection]
+        departments = sorted(self._shopping_list_service.get_department_order_in_store(), key=lambda x: str(x))
+        return departments[department_selection]
 
     def _find_selection_from_department(self, department_name):
-        for department in self._departments:
+        departments = sorted(self._shopping_list_service.get_department_order_in_store(), key=lambda x: str(x))
+        for department in departments:
             if department.name.lower() == department_name.lower():
-                return self._departments.index(department)
+                return departments.index(department)

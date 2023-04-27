@@ -10,7 +10,22 @@ from ui.enter_items_frame import EnterItemsFrame
 
 
 class MainView:
+    """Class responsible for the main user interface of the application.
+    
+    Attributes:
+        shopping_list_service: application logic
+        root: Tkinter-window into which the user interface is initialized
+        options_frame: Tkinter-frame with some main options for user
+        shopping_list_frame: Tkinter-frame with view of current shopping list
+        enter_items_frame: Tkinter-frame with options for searching for products and adding them to shopping list
+        
+    """
     def __init__(self, root):
+        """Class constructor.
+
+        Args:
+            root (Tk): Tkinter-window into which the user interface is initialized 
+        """
         self._shopping_list_service = ShoppingListService(
             ProductRepository(), StoreRepository())
         self._root = root
@@ -19,6 +34,7 @@ class MainView:
         self._enter_items_frame = None
 
     def display(self):
+        """ Displays the mainview."""
 
         self._options_frame = OptionsFrame(
             self._root, self._shopping_list_service)
