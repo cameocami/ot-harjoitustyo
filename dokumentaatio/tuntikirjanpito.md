@@ -11,5 +11,6 @@
 | 8.4.  | 3    | Käyttöliittymän jakamista eri luokkiin, ruudun päivittymiseen liittyvät korjaukset  |
 | 18.4.  | 3    | Sovelluslogiikan testausta ja pakkauskaavion luonti  |
 | 24.4.  | 4    | Haku toiminnon laajentaminen  |
-| 25.4.  | 2    | Testit haku toiminnon laajennukseen, yhden päätoiminnallisuuden sekvenssikaavio  |
-| yht   | 39   | | 
+| 25.4.  | 2    | Testit haku toiminnon laajennukseen, yhden päätoiminnallisuuden sekvenssikaavio  | 
+| 27.4.  | 2    | Docstringin aloitus, ympäristömuuttujien luonti ja konfiguraation eristäminen sovelluksen koodista  |  
+| yht   | 41   | | 
