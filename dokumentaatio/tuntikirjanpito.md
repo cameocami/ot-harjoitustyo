@@ -13,4 +13,5 @@
 | 24.4.  | 4    | Haku toiminnon laajentaminen  |
 | 25.4.  | 2    | Testit haku toiminnon laajennukseen, yhden päätoiminnallisuuden sekvenssikaavio  | 
 | 27.4.  | 3    | Docstringin aloitus, ympäristömuuttujien luonti ja konfiguraation eristäminen sovelluksen koodista  |  
-| yht   | 42   | | 
+| 9.5.  | 3    | Poista-painikkeiden lisääminen käyttöliittymään |  
+| yht   | 45   | | 
