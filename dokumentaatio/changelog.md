@@ -26,4 +26,9 @@
 
 ## Viikko 6
 
+## Viikko 7
+
+- Käyttäjä voi poistaa kauppalistalta tuotteita poista-painikkeella
+
+
 
