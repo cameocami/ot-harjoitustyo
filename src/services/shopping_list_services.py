@@ -1,16 +1,17 @@
 
 from repositories.product_repository import ProductRepository
 from repositories.store_repository import StoreRepository
-from config import SHOPPING_LIST_PATH
+from repositories.shopping_list_repository import ShoppingListRepository
 
 
 class ShoppingListService:
 
-    def __init__(self, product_repository: ProductRepository, store_repository: StoreRepository):
+    def __init__(self, product_repository: ProductRepository, store_repository: StoreRepository, shopping_list_repository: ShoppingListRepository):
         self._product_repository = product_repository
         self._current_shopping_list = {}
         self._store_repository = store_repository
         self._store = self._store_repository.get_store("oletuskauppa")
+        self._shopping_list_repository = shopping_list_repository
 
     def get_current_shopping_list(self):
         return self._current_shopping_list
@@ -68,23 +69,8 @@ class ShoppingListService:
         self._current_shopping_list[product][unit] += amount
 
     def compile_shopping_list(self):
-        with open(SHOPPING_LIST_PATH, mode="w", encoding="utf-8") as shopping_list_file:
-            for department in self._store.get_department_order_in_store():
-                shopping_list_file.write(f'{department.capitalize()}\n')
-                for product, amounts in self._current_shopping_list.items():
-                    print(product)
-                    print(product.department)
-                    if product.department == department:
-                        shopping_list_file.write(f' -  {str(product)}, ')
-                        several_units = False
-                        for unit, amount in amounts.items():
-                            if amount > 0:
-                                if several_units:
-                                    shopping_list_file.write(' + ')
-                                shopping_list_file.write(f'{amount} {unit}')
-                                several_units = True
-                        shopping_list_file.write("\n")
-                shopping_list_file.write("\n")
+        self._shopping_list_repository.compile_shopping_list(
+            self._store.get_department_order_in_store(), self._current_shopping_list)
 
     def delete_product_from_shopping_list(self, product, unit):
         self._current_shopping_list[product][unit] = 0

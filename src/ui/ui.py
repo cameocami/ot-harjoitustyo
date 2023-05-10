@@ -3,6 +3,7 @@ from tkinter import Tk, ttk, constants, StringVar, IntVar, Radiobutton
 from services.shopping_list_services import ShoppingListService
 from repositories.product_repository import ProductRepository
 from repositories.store_repository import StoreRepository
+from repositories.shopping_list_repository import ShoppingListRepository
 
 from ui.options_frame import OptionsFrame
 from ui.shopping_list_frame import ShoppingListFrame
@@ -28,7 +29,7 @@ class MainView:
             root (Tk): Tkinter-window into which the user interface is initialized 
         """
         self._shopping_list_service = ShoppingListService(
-            ProductRepository(), StoreRepository())
+            ProductRepository(), StoreRepository(), ShoppingListRepository())
         self._root = root
         self._options_frame = None
         self._shopping_list_frame = None
