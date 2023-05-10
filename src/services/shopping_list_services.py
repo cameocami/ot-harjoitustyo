@@ -1,12 +1,7 @@
 
-from repositories.product_repository import ProductRepository
-from repositories.store_repository import StoreRepository
-from repositories.shopping_list_repository import ShoppingListRepository
-
-
 class ShoppingListService:
 
-    def __init__(self, product_repository: ProductRepository, store_repository: StoreRepository, shopping_list_repository: ShoppingListRepository):
+    def __init__(self, product_repository, store_repository, shopping_list_repository):
         self._product_repository = product_repository
         self._current_shopping_list = {}
         self._store_repository = store_repository
@@ -29,28 +24,40 @@ class ShoppingListService:
                 suggestions.append(product)
             elif product.name in product_entry:
                 suggestions.append(product)
-            elif len(product_entry) > len(product.name):
-                for i in range(len(product_entry)):
-                    suggestion = product_entry[:i] + product_entry[i+1:]
-                    if product.name == suggestion:
-                        suggestions.append(product)
-                        break
-            elif len(product_entry) < len(product.name):
-                for i in range(len(product.name)):
-                    product_misspelling = product.name[:i] + product.name[i+1:]
-                    if product_misspelling == product_entry:
-                        suggestions.append(product)
-                        break
-            elif len(product_entry) == len(product.name):
-                for i in range(len(product.name)):
-                    product_misspelling = product.name[:i] + product.name[i+1:]
-                    suggestion = product_entry[:i] + product_entry[i+1:]
-                    if product_misspelling == suggestion:
-                        suggestions.append(product)
-                        break
+            elif self._check_for_extra_letters(product, product_entry):
+                suggestions.append(product)
+            elif self._check_for_missing_letters(product, product_entry):
+                suggestions.append(product)
+            elif self._check_for_single_letter_misspelling(product, product_entry):
+                suggestions.append(product)
             if len(suggestions) > 9:
                 break
         return (False, suggestions)
+
+    def _check_for_extra_letters(self, product, product_entry: str):
+        if len(product_entry) > len(product.name):
+            for i in range(len(product_entry)):
+                suggestion = product_entry[:i] + product_entry[i+1:]
+                if product.name == suggestion:
+                    return True
+        return False
+
+    def _check_for_missing_letters(self, product, product_entry: str):
+        if len(product_entry) < len(product.name):
+            for i in range(len(product.name)):
+                product_misspelling = product.name[:i] + product.name[i+1:]
+                if product_misspelling == product_entry:
+                    return True
+        return False
+
+    def _check_for_single_letter_misspelling(self, product, product_entry: str):
+        if len(product_entry) == len(product.name):
+            for i in range(len(product.name)):
+                product_misspelling = product.name[:i] + product.name[i+1:]
+                suggestion = product_entry[:i] + product_entry[i+1:]
+                if product_misspelling == suggestion:
+                    return True
+        return False
 
     def create_new_product(self, product_name: str, department: str):
         product = self._product_repository.add_product(
