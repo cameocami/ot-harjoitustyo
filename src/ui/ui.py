@@ -11,15 +11,16 @@ from ui.enter_items_frame import EnterItemsFrame
 
 class MainView:
     """Class responsible for the main user interface of the application.
-    
+
     Attributes:
-        shopping_list_service: application logic
+        shopping_list_service: service class that controls the application logic
         root: Tkinter-window into which the user interface is initialized
         options_frame: Tkinter-frame with some main options for user
         shopping_list_frame: Tkinter-frame with view of current shopping list
         enter_items_frame: Tkinter-frame with options for searching for products and adding them to shopping list
-        
+
     """
+
     def __init__(self, root):
         """Class constructor.
 

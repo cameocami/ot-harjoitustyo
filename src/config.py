@@ -14,3 +14,6 @@ PRODUCT_REPOSITORY_PATH = os.path.join(
 
 STORE_REPOSITORY = os.getenv("STORE_REPOSITORY") or "stores.csv"
 STORE_REPOSITORY_PATH = os.path.join(dirname, "..", "data", STORE_REPOSITORY)
+
+SHOPPING_LIST = os.getenv("SHOPPING_LIST") or "kauppalista.txt"
+SHOPPING_LIST_PATH = os.path.join(dirname, "..", "data", SHOPPING_LIST)

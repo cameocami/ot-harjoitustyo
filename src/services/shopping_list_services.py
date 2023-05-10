@@ -1,6 +1,7 @@
 
 from repositories.product_repository import ProductRepository
 from repositories.store_repository import StoreRepository
+from config import SHOPPING_LIST_PATH
 
 
 class ShoppingListService:
@@ -50,7 +51,7 @@ class ShoppingListService:
                 break
         return (False, suggestions)
 
-    def create_new_product(self, product_name: str, department: "Department"):
+    def create_new_product(self, product_name: str, department: str):
         product = self._product_repository.add_product(
             product_name, department)
         return product
@@ -67,12 +68,14 @@ class ShoppingListService:
         self._current_shopping_list[product][unit] += amount
 
     def compile_shopping_list(self):
-        with open("kauppalista.txt", mode="w", encoding="utf-8") as shopping_list_file:
+        with open(SHOPPING_LIST_PATH, mode="w", encoding="utf-8") as shopping_list_file:
             for department in self._store.get_department_order_in_store():
-                shopping_list_file.write(f'{department}\n')
+                shopping_list_file.write(f'{department.capitalize()}\n')
                 for product, amounts in self._current_shopping_list.items():
-                    if product.department == department.name:
-                        shopping_list_file.write(str(product) + ", ")
+                    print(product)
+                    print(product.department)
+                    if product.department == department:
+                        shopping_list_file.write(f' -  {str(product)}, ')
                         several_units = False
                         for unit, amount in amounts.items():
                             if amount > 0:
@@ -83,6 +86,13 @@ class ShoppingListService:
                         shopping_list_file.write("\n")
                 shopping_list_file.write("\n")
 
-    def change_store(self, store_name):
-        store = self._store_repository.get_store(store_name)
-        self._store = store
+    def delete_product_from_shopping_list(self, product, unit):
+        self._current_shopping_list[product][unit] = 0
+
+        all_amounts_at_zero = True
+        amounts = self._current_shopping_list[product]
+        for units in amounts:
+            if amounts[units] > 0:
+                all_amounts_at_zero = False
+        if all_amounts_at_zero:
+            self._current_shopping_list.pop(product)

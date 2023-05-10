@@ -1,4 +1,3 @@
-from entities.department import Department
 
 
 class Product:
@@ -6,14 +5,14 @@ class Product:
 
     Attributes:
             name (str): product name
-            department (Department): department in which product is found
+            department (str): department in which product is found
     """
 
-    def __init__(self, name: str, department: Department):
+    def __init__(self, name: str, department: str):
         """Class constructor, that creates a new product 
         Args:
             name (str): product name
-            department (Department): department in which product is found
+            department (str): department in which product is found
         """
         self.name = name.lower()
         self.department = department

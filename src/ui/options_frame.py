@@ -4,12 +4,13 @@ from services.shopping_list_services import ShoppingListService
 
 class OptionsFrame:
     """Class responsible for Tkinter-frame of with main options for the user.
-    
+
     Attributes:
         shopping_list_service: service class that controls the application logic
         frame: the master frame of the Tkinter-window into which the user interface is initialized
         compile_shopping_list_button: Tkinter-button that compiles the shopping list into a new file
     """
+
     def __init__(self, root, shopping_list_service):
         """Class constructor. 
 
@@ -17,7 +18,7 @@ class OptionsFrame:
             root (Tk): original Tkinter-window into which the user interface is initialized
             shopping_list_service (ShoppingListService): service class that controls the application logic
         """
-    
+
         self._shopping_list_service = shopping_list_service
         self._frame = ttk.Frame(master=root)
 

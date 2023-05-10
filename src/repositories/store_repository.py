@@ -1,5 +1,4 @@
 import csv
-from entities.department import Department
 from entities.store import Store
 from config import STORE_REPOSITORY_PATH
 
@@ -10,25 +9,17 @@ class StoreRepository:
         self._stores = []
         self.pull_database()
 
-    def get_store_repository(self):
-        return self._stores
-
     def pull_database(self):
         with open(self._file_path, mode='r', encoding='UTF-8') as store_file:
             for row in csv.reader(store_file, delimiter=';'):
                 name = row[0]
                 departments = []
-                for department_name in row[1:]:
-                    departments.append(Department(department_name))
+                for department in row[1:]:
+                    departments.append(department)
                 self._stores.append(Store(name, departments))
 
-    def save_to_database(self):
-        with open(self._file_path, mode='w', encoding='UTF-8') as store_file:
-            for store in self._stores:
-                store_file.write(f'{store.name}')
-                for department in store.departments:
-                    store_file.write(f';{department}')
-                store_file.write('\n')
+    def get_store_repository(self):
+        return self._stores
 
     def get_store(self, store_name: str):
         for store in self._stores:
