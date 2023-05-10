@@ -29,6 +29,7 @@
 ## Viikko 7
 
 - Käyttäjä voi poistaa kauppalistalta tuotteita poista-painikkeella
+- Käyttäjä saa virheilmoituksen, jos tuote on kirjoitettu tai valittu väärin
 
 
 
