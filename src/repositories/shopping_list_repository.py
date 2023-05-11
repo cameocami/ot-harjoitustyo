@@ -1,3 +1,4 @@
+from pathlib import Path
 from config import SHOPPING_LIST_PATH
 
 
@@ -16,7 +17,7 @@ class ShoppingListRepository:
                 text += self._amount_str_from_amount_dict(product[1])
                 text += "\n"
             text += "\n"
-
+        self._ensure_file_exists()
         with open(self._file_path, mode="w", encoding="utf-8") as shopping_list_file:
             shopping_list_file.write(text)
 
@@ -41,3 +42,6 @@ class ShoppingListRepository:
                 amount_str += f'{amount} {unit}'
                 several_units = True
         return amount_str
+
+    def _ensure_file_exists(self):
+        Path(self._file_path).touch()
