@@ -5,3 +5,6 @@ coverage
 htmlcov
 .pytest_cache
 kauppalista.txt
+test-products.csv
+test-stores.csv
+test-kauppalista.txt

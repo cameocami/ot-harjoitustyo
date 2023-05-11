@@ -1,6 +1,5 @@
 import unittest
 from entities.product import Product
-from entities.department import Department
 from entities.store import Store
 from services.shopping_list_services import ShoppingListService
 
@@ -8,23 +7,23 @@ from services.shopping_list_services import ShoppingListService
 class FakeProductRepository:
     def __init__(self):
         self._products = [
-            Product("omena", Department("hevi")),
-            Product("granaattiomena", Department("hevi")),
-            Product("päärynä", Department("hevi")),
-            Product("peruna", Department("hevi")),
-            Product("sipuli", Department("hevi")),
-            Product("maito", Department("maitotuotteet")),
-            Product("omenarahka", Department("maitotuotteet")),
-            Product("jogurtti", Department("maitotuotteet")),
-            Product("kermaviili", Department("maitotuotteet")),
-            Product("kuohukerma", Department("maitotuotteet")),
-            Product("ruisleipä", Department("leipä"))
+            Product("omena", "hevi"),
+            Product("granaattiomena", "hevi"),
+            Product("päärynä", "hevi"),
+            Product("peruna", "hevi"),
+            Product("sipuli", "hevi"),
+            Product("maito", "maitotuotteet"),
+            Product("omenarahka", "maitotuotteet"),
+            Product("jogurtti", "maitotuotteet"),
+            Product("kermaviili", "maitotuotteet"),
+            Product("kuohukerma", "maitotuotteet"),
+            Product("ruisleipä", "leipä")
         ]
 
     def get_products(self):
         return self._products
 
-    def add_product(self, product_name: str, department: "Department"):
+    def add_product(self, product_name: str, department: str):
         product = Product(product_name, department)
         self._products.append(product)
         return product
@@ -33,9 +32,9 @@ class FakeProductRepository:
 class FakeStoreRepository:
     def __init__(self):
         self._stores = [Store("oletuskauppa", [
-            Department("hevi"),
-            Department("leipä"),
-            Department("maito")]), Store("Alepa Kamppi", [Department("hevi"), Department("valmisruoka"), Department("makeiset")])]
+            "hevi",
+            "leipä",
+            "maito"]), Store("Alepa Kamppi", ["hevi", "valmisruoka", "makeiset"])]
 
     def get_store(self, store_name: str):
         for store in self._stores:
@@ -44,13 +43,15 @@ class FakeStoreRepository:
         return self._stores[0]
 
 
+class FakeShoppingListRepository:
+    def __init__(self):
+        pass
+
+
 class TestShoppingListService(unittest.TestCase):
     def setUp(self):
         self.shopping_list_service = ShoppingListService(
-            FakeProductRepository(), FakeStoreRepository())
-
-        self.product_a = Product("ruisleipä", Department("leipä"))
-        self.product_b = Product("päärynä", Department("hevi"))
+            FakeProductRepository(), FakeStoreRepository(), FakeShoppingListRepository())
 
     def test_get_current_shopping_list(self):
         current_shopping_list = self.shopping_list_service.get_current_shopping_list()
@@ -61,16 +62,16 @@ class TestShoppingListService(unittest.TestCase):
         department_order_in_store = self.shopping_list_service.get_department_order_in_store()
 
         self.assertEqual(len(department_order_in_store), 3)
-        self.assertEqual(department_order_in_store[0].name, "hevi")
-        self.assertEqual(department_order_in_store[1].name, "leipä")
-        self.assertEqual(department_order_in_store[2].name, "maito")
+        self.assertEqual(department_order_in_store[0], "hevi")
+        self.assertEqual(department_order_in_store[1], "leipä")
+        self.assertEqual(department_order_in_store[2], "maito")
 
     def test_find_product_with_exact_spelling(self):
         product_suggestion = self.shopping_list_service.find_product("omena")
 
         self.assertEqual(product_suggestion[0], True)
         self.assertEqual(product_suggestion[1].name, "omena")
-        self.assertEqual(product_suggestion[1].department.name, "hevi")
+        self.assertEqual(product_suggestion[1].department, "hevi")
 
     def test_find_product_with_partial_entry(self):
         product_suggestions = self.shopping_list_service.find_product("mena")
@@ -131,17 +132,17 @@ class TestShoppingListService(unittest.TestCase):
 
     def test_create_new_product(self):
         product = self.shopping_list_service.create_new_product(
-            "paahtoleipä", Department("leipä"))
+            "paahtoleipä", "leipä")
 
         self.assertEqual(self.shopping_list_service._product_repository.get_products(
         )[-1].name, "paahtoleipä")
         self.assertEqual(self.shopping_list_service._product_repository.get_products(
-        )[-1].department.name, "leipä")
+        )[-1].department, "leipä")
         self.assertEqual(product.name, "paahtoleipä")
-        self.assertEqual(product.department.name, "leipä")
+        self.assertEqual(product.department, "leipä")
 
     def test_add_new_product_to_current_shopping_list(self):
-        product = Product("ruokakerma", Department("maito"))
+        product = Product("ruokakerma", "maito")
         self.shopping_list_service.add_product_to_current_shopping_list(
             product, 200, "ml")
 
@@ -159,7 +160,7 @@ class TestShoppingListService(unittest.TestCase):
                          product]["kg"], 0)
 
     def test_add_to_existing_product_to_current_shopping_list(self):
-        product = Product("ruokakerma", Department("maito"))
+        product = Product("ruokakerma", "maito")
         self.shopping_list_service.add_product_to_current_shopping_list(
             product, 200, "ml")
         self.shopping_list_service.add_product_to_current_shopping_list(
@@ -178,8 +179,31 @@ class TestShoppingListService(unittest.TestCase):
         self.assertEqual(self.shopping_list_service.get_current_shopping_list()[
                          product]["kg"], 0)
 
-    def test_change_store(self):
-        self.shopping_list_service.change_store("Alepa Kamppi")
+    def test_delete_product_from_shopping_list(self):
+        product = Product("makaronilaatikko", "valmisruoka")
+
+        self.shopping_list_service.add_product_to_current_shopping_list(
+            product, 400, "g")
+        self.shopping_list_service.delete_product_from_shopping_list(
+            product, "g")
 
         self.assertEqual(
-            self.shopping_list_service._store.name, "Alepa Kamppi")
+            self.shopping_list_service.get_current_shopping_list(), {})
+
+    def test_reduce_amount_of_product_in_shopping_list(self):
+        product = Product("makaronilaatikko", "valmisruoka")
+
+        self.shopping_list_service.add_product_to_current_shopping_list(
+            product, 400, "g")
+        self.shopping_list_service.add_product_to_current_shopping_list(
+            product, 1, "kpl")
+        self.shopping_list_service.delete_product_from_shopping_list(
+            product, "g")
+
+        self.assertEqual(self.shopping_list_service.get_current_shopping_list()[product], {
+            "kpl": 1,
+            "ml": 0,
+            "l": 0,
+            "g": 0,
+            "kg": 0,
+        })
