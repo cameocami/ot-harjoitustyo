@@ -15,4 +15,5 @@
 | 27.4.  | 3    | Docstringin aloitus, ympäristömuuttujien luonti ja konfiguraation eristäminen sovelluksen koodista  |  
 | 9.5.  | 3    | Poista-painikkeiden lisääminen käyttöliittymään |  
 | 10.5.  | 5    | Pylint korjauksia, ylimääräisen luokan poistaminen, kauppalista-repositorion luominen ja virheidenkäsittelyn lisääminen |
-| yht   | 50   | | 
+| 11.5.  | 2    | Testikattavuuden lisääminen |
+| yht   | 52   | | 
