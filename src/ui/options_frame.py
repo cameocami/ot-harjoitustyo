@@ -22,13 +22,33 @@ class OptionsFrame:
         self._shopping_list_service = shopping_list_service
         self._frame = ttk.Frame(master=root)
 
+        self._compile_shopping_list_button = None
+        self._empty_shopping_list_button = None
+
     def pack(self):
         """Creates the elements in the options frame and displays them."""
+
+        self._form_compile_shopping_list_button()
+        self._form_empty_shopping_list_button()
+
+        self._compile_shopping_list_button.grid(row=0, column=0, padx=5)
+        self._empty_shopping_list_button.grid(row=0, column=2)
+
+        self._frame.pack(pady=10)
+
+    def _form_compile_shopping_list_button(self):
+        if self._compile_shopping_list_button:
+            self._compile_shopping_list_button.destroy()
+
         self._compile_shopping_list_button = ttk.Button(
             master=self._frame, text="Laadi kauppalista", command=self._compile_shopping_list_button_handler)
-        self._compile_shopping_list_button.grid(
-            row=0, column=0, padx=5, pady=5, sticky=constants.E)
-        self._frame.pack()
+
+    def _form_empty_shopping_list_button(self):
+        if self._empty_shopping_list_button:
+            self._empty_shopping_list_button.destroy()
+
+        self._empty_shopping_list_button = ttk.Button(
+            master=self._frame, text="Tyhjennä kauppalista", command=self._empty_shopping_list_button_handler)
 
     def destroy(self):
         """Destroys the frame."""
@@ -39,3 +59,8 @@ class OptionsFrame:
 
         self._shopping_list_service.compile_shopping_list_file()
         self._shopping_list_service.open_shopping_list_file()
+
+    def _empty_shopping_list_button_handler(self):
+        """Calls the application logic to empty the shopping list."""
+
+        self._shopping_list_service.empty_shopping_list()

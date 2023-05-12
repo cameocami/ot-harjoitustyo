@@ -16,10 +16,10 @@ class EnterItemsFrame:
         add_button_frame: subframe for the button for adding a product to shopping list and product repository
         error_messages_frame = subframe for list of errors
 
-        entry_text: Tkinter-stringvariable for entered product name
-        entry_amount: Tkinter stringvariable for entered amount
-        option_unit: Tkinter stringvariable for chosen unit type
-        radiobutton_department: Tkinter-integervariable for chosen department
+        entry_text_var: Tkinter-stringvariable for entered product name
+        entry_amount_var: Tkinter stringvariable for entered amount
+        option_unit_var: Tkinter stringvariable for chosen unit type
+        radiobutton_department_var: Tkinter-integervariable for chosen department
 
         product_suggestions: list of suggestions for user when product not found when searched
         error_messages: list of error messages for invalid inputs
@@ -38,13 +38,19 @@ class EnterItemsFrame:
         self._add_button_frame = None
         self._error_messages_frame = None
 
-        self._entry_text = StringVar()
-        # self._entry_text.set("Lisää tuote kauppalistalle")
-        self._entry_amount = StringVar()
-        self._entry_amount.set(0)
-        self._option_unit = StringVar()
-        self._radiobutton_department = IntVar()
-        self._radiobutton_department.set(None)
+        self._entry_text_var = StringVar()
+        self._product_entry_widget = None
+        # self._entry_text_var.set("Lisää tuote kauppalistalle")
+
+        self._entry_amount_var = StringVar()
+        self._amount_entry_widget = None
+        self._entry_amount_var.set("")
+
+        self._option_unit_var = StringVar()
+        self._unit_option_widget = None
+
+        self._radiobutton_department_var = IntVar()
+        self._radiobutton_department_var.set(None)
 
         self._error_messages = []
         self._product_suggestions = []
@@ -60,10 +66,10 @@ class EnterItemsFrame:
         self._form_error_messages_frame()
         self._form_product_suggestions_frame()
 
-        self._entry_frame.pack()
+        self._entry_frame.pack(pady=10)
         self._product_suggestions_frame.pack()
-        self._departments_frame.pack()
-        self._add_button_frame.pack()
+        self._departments_frame.pack(pady=10)
+        self._add_button_frame.pack(pady=10)
         self._error_messages_frame.pack()
         self._frame.pack()
 
@@ -74,22 +80,29 @@ class EnterItemsFrame:
 
         self._entry_frame = ttk.Frame(master=self._frame)
 
-        product_entry = ttk.Entry(
-            master=self._entry_frame, width=46, textvariable=self._entry_text)
-        product_entry.grid(row=0, column=0)
+        if self._product_entry_widget:
+            self._product_entry_widget.destroy()
+        self._product_entry_widget = ttk.Entry(
+            master=self._entry_frame, width=46, textvariable=self._entry_text_var)
+        self._product_entry_widget.grid(row=0, column=0)
 
-        amount_entry = ttk.Entry(
-            master=self._entry_frame, width=10, textvariable=self._entry_amount)
-        amount_entry.grid(row=0, column=1)
+        if self._amount_entry_widget:
+            self._amount_entry_widget.destroy()
+        self._amount_entry_widget = ttk.Entry(
+            master=self._entry_frame, width=10, textvariable=self._entry_amount_var)
+        self._amount_entry_widget.grid(row=0, column=1)
+
+        if self._unit_option_widget:
+            self._unit_option_widget.destroy()
 
         unit_options = ["kpl", "ml", "l", "g", "kg"]
-        unit_option = ttk.OptionMenu(
-            self._entry_frame, self._option_unit, unit_options[0], *unit_options)
-        unit_option.config(width=3)
-        unit_option.grid(row=0, column=2)
+        self._unit_option_widget = ttk.OptionMenu(
+            self._entry_frame, self._option_unit_var, unit_options[0], *unit_options)
+        self._unit_option_widget.config(width=3)
+        self._unit_option_widget.grid(row=0, column=2)
 
         search_product_button = ttk.Button(
-            master=self._entry_frame, width=9, text="Etsi", command=self._search_product_button_handler)
+            master=self._entry_frame, width=9, text="Etsi", command=self.search_product_button_handler)
         search_product_button.grid(row=0, column=3)
 
     def _form_product_suggestions_frame(self):
@@ -117,8 +130,9 @@ class EnterItemsFrame:
     def _set_chosen_product(self, product):
         radiobutton_pos = self._find_selection_from_department(
             product.department)
-        self._radiobutton_department.set(radiobutton_pos)
-        self._entry_text.set(product)
+        self._radiobutton_department_var.set(radiobutton_pos)
+        self._entry_text_var.set(product)
+        self._amount_entry_widget.focus()
 
     def _form_departments_frame(self):
 
@@ -134,7 +148,7 @@ class EnterItemsFrame:
         grid_column = 0
         for department in departments:
             department_selection = Radiobutton(
-                master=self._departments_frame, width=25, text=department.capitalize(), indicatoron=0, variable=self._radiobutton_department, value=position)
+                master=self._departments_frame, width=25, text=department.capitalize(), indicatoron=0, variable=self._radiobutton_department_var, value=position)
             department_selection.grid(row=grid_row, column=grid_column)
             position += 1
             grid_column += 1
@@ -150,7 +164,7 @@ class EnterItemsFrame:
         self._add_button_frame = ttk.Frame(master=self._frame)
 
         self._add_product_button = ttk.Button(
-            self._add_button_frame, text="Lisää", command=self._add_product_button_handler)
+            self._add_button_frame, text="Lisää", command=self.add_product_button_handler)
         self._add_product_button.grid(sticky=constants.E)
 
     def _form_error_messages_frame(self):
@@ -187,7 +201,7 @@ class EnterItemsFrame:
         self._error_messages = []
 
         if self._check_product_entry_validity():
-            product_entry = self._entry_text.get().lower()
+            product_entry = self._entry_text_var.get().lower()
             found_products = self._shopping_list_service.find_product(
                 product_entry)
 
@@ -200,7 +214,7 @@ class EnterItemsFrame:
                 self._product_suggestions = found_products
                 heading = "Löytyi useampi tuote:"
                 self._product_suggestions.insert(0, heading)
-                self._radiobutton_department.set(None)
+                self._radiobutton_department_var.set(None)
 
             else:
                 self._product_suggestions = self._shopping_list_service.form_product_suggestions(
@@ -211,9 +225,11 @@ class EnterItemsFrame:
                 elif len(self._product_suggestions) > 1:
                     heading += " Tarkoititko jotain seuraavista:"
                 self._product_suggestions.insert(0, heading)
-                self._radiobutton_department.set(None)
+                self._radiobutton_department_var.set(None)
 
         self.pack()
+        if self._product_suggestions == ["Tuote löytyi!"]:
+            self._amount_entry_widget.focus()
 
     def add_product_button_handler(self):
 
@@ -225,11 +241,11 @@ class EnterItemsFrame:
         department_valid = self._check_department_selection_validity()
 
         if entry_valid and amount_valid and department_valid:
-            product_entry = self._entry_text.get().lower()
-            amount_entry = int(self._entry_amount.get())
-            unit_option = self._option_unit.get()
+            product_entry = self._entry_text_var.get().lower()
+            amount_entry = int(self._entry_amount_var.get())
+            unit_option = self._option_unit_var.get()
             selected_department = self._find_department_from_selection(
-                self._radiobutton_department.get())
+                self._radiobutton_department_var.get())
 
             found_products = self._shopping_list_service.find_product(
                 product_entry, selected_department)
@@ -244,17 +260,17 @@ class EnterItemsFrame:
                 product, amount_entry, unit_option)
 
             self._display_shopping_list_changes()
-            self._entry_text.set("")
-            self._entry_amount.set("")
-            self._option_unit.set("kpl")
-            self._radiobutton_department.set(None)
+            self._entry_text_var.set("")
+            self._entry_amount_var.set("")
+            self._option_unit_var.set("kpl")
+            self._radiobutton_department_var.set(None)
             self._product_suggestions = []
             self._error_messages = []
 
         self.pack()
 
     def _check_product_entry_validity(self):
-        product_entry = self._entry_text.get()
+        product_entry = self._entry_text_var.get()
         if product_entry == "Lisää tuote kauppalistalle":
             self._error_messages.append("Kirjoita tuotekenttään tuote.")
             return False
@@ -269,8 +285,8 @@ class EnterItemsFrame:
         return True
 
     def _check_amount_entry_validity(self):
-        amount_entry = self._entry_amount.get()
-        if amount_entry == 0 or len(amount_entry) == 0:
+        amount_entry = self._entry_amount_var.get()
+        if int(amount_entry) == 0 or len(amount_entry) == 0:
             self._error_messages.append("Lisää määrä.")
             return False
         try:
@@ -282,7 +298,7 @@ class EnterItemsFrame:
 
     def _check_department_selection_validity(self):
         try:
-            self._radiobutton_department.get()
+            self._radiobutton_department_var.get()
         except:
             self._error_messages.append("Valitse osasto.")
             return False

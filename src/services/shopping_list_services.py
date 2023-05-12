@@ -104,3 +104,6 @@ class ShoppingListService:
                 all_amounts_at_zero = False
         if all_amounts_at_zero:
             self._current_shopping_list.pop(product)
+
+    def empty_shopping_list(self):
+        self._current_shopping_list = {}
