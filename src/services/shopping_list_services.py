@@ -1,17 +1,5 @@
 
 
-class InvalidProductEntry:
-    pass
-
-
-class InvalidAmountEntry:
-    pass
-
-
-class InvalidDepartmentSelection:
-    pass
-
-
 class ShoppingListService:
 
     def __init__(self, product_repository, store_repository, shopping_list_repository):
@@ -27,15 +15,23 @@ class ShoppingListService:
     def get_department_order_in_store(self):
         return self._store.get_department_order_in_store()
 
-    def find_product(self, product_entry: str):
-        for product in self._product_repository.get_products():
-            if product.name == product_entry:
-                return product
-        return None
+    def find_product(self, product_entry: str, department=None):
+        found_products = []
+        if department:
+            for product in self._product_repository.get_products():
+                if product.name == product_entry and product.department == department:
+                    found_products.append(product)
+        else:
+            for product in self._product_repository.get_products():
+                if product.name == product_entry:
+                    found_products.append(product)
+        return found_products
 
     def form_product_suggestions(self, product_entry: str):
         suggestions = []
         for product in self._product_repository.get_products():
+            if product.name == product_entry:
+                suggestions.append(product)
             if product_entry in product.name:
                 suggestions.append(product)
             elif product.name in product_entry:
