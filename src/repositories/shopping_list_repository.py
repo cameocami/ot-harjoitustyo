@@ -21,6 +21,8 @@ class ShoppingListRepository:
         self._ensure_file_exists()
         with open(self._file_path, mode="w", encoding="utf-8") as shopping_list_file:
             shopping_list_file.write(text)
+
+    def open_shopping_list_file(self):
         startfile(self._file_path)
 
     def _sort_products(self, department_order_in_store: list, shopping_list: dict):

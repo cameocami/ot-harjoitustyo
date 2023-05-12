@@ -5,7 +5,7 @@ class ShoppingListService:
         self._product_repository = product_repository
         self._current_shopping_list = {}
         self._store_repository = store_repository
-        self._store = self._store_repository.get_store("oletuskauppa")
+        self._store = self._store_repository.get_store("default store")
         self._shopping_list_repository = shopping_list_repository
 
     def get_current_shopping_list(self):
@@ -15,11 +15,14 @@ class ShoppingListService:
         return self._store.get_department_order_in_store()
 
     def find_product(self, product_entry: str):
-        suggestions = []
-        product_entry = product_entry.lower()
         for product in self._product_repository.get_products():
             if product.name == product_entry:
-                return (True, product)
+                return product
+        return None
+
+    def form_product_suggestions(self, product_entry: str):
+        suggestions = []
+        for product in self._product_repository.get_products():
             if product_entry in product.name:
                 suggestions.append(product)
             elif product.name in product_entry:
@@ -32,7 +35,7 @@ class ShoppingListService:
                 suggestions.append(product)
             if len(suggestions) > 9:
                 break
-        return (False, suggestions)
+        return suggestions
 
     def _check_for_extra_letters(self, product, product_entry: str):
         if len(product_entry) > len(product.name):
@@ -75,9 +78,12 @@ class ShoppingListService:
             }
         self._current_shopping_list[product][unit] += amount
 
-    def compile_shopping_list(self):
+    def compile_shopping_list_file(self):
         self._shopping_list_repository.compile_shopping_list(
             self._store.get_department_order_in_store(), self._current_shopping_list)
+
+    def open_shopping_list_file(self):
+        self._shopping_list_repository.open_shopping_list_file()
 
     def delete_product_from_shopping_list(self, product, unit):
         self._current_shopping_list[product][unit] = 0

@@ -35,5 +35,5 @@ class StoreRepository:
 
     def delete_all(self):
         self._stores = []
-        with open(self._file_path, mode='w', encoding='UTF-8') as product_file:
+        with open(self._file_path, mode='w', encoding='UTF-8'):
             pass

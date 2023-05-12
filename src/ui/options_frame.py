@@ -37,4 +37,5 @@ class OptionsFrame:
     def _compile_shopping_list_button_handler(self):
         """Calls the application logic to compile the shopping list into a new file."""
 
-        self._shopping_list_service.compile_shopping_list()
+        self._shopping_list_service.compile_shopping_list_file()
+        self._shopping_list_service.open_shopping_list_file()

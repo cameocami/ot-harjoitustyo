@@ -28,7 +28,6 @@ class TestStoreRepository(unittest.TestCase):
         self.assertEqual(stores[0].departments[1], "valmisruoka")
         self.assertEqual(stores[0].departments[2], "makeiset")
 
-
     def test_get_store_by_name(self):
         store1 = Store("Oletuskauppa", ["hevi", "valmisruoka", "makeiset"])
         store2 = Store("K-market Kamppi", ["hevi", "leipä", "maito"])
@@ -47,6 +46,5 @@ class TestStoreRepository(unittest.TestCase):
         found_store = self.store_repository.get_store("K-supermarket Kamppi")
 
         self.assertEqual(found_store.name, "Oletuskauppa")
-        self.assertEqual(found_store.departments, ["hevi", "valmisruoka", "makeiset"])
-
-    
+        self.assertEqual(found_store.departments, [
+                         "hevi", "valmisruoka", "makeiset"])

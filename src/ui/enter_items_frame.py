@@ -112,20 +112,23 @@ class EnterItemsFrame:
     def _search_product_button_handler(self):
         self._suggestions = []
         if self._check_product_entry_validity():
-            product_suggestion = self._shopping_list_service.find_product(
-                self._entry_text.get().lower())
-            if product_suggestion[0]:
-                product = product_suggestion[1]
+            product_entry = self._entry_text.get().lower()
+            product = self._shopping_list_service.find_product(product_entry)
+            if product:
                 radiobutton_pos = self._find_selection_from_department(
                     product.department)
                 self._radiobutton_department.set(radiobutton_pos)
                 self._suggestions.append("Tuote löytyi!")
             else:
-                self._suggestions = product_suggestion[1]
+                self._suggestions = self._shopping_list_service.form_product_suggestions(
+                    product_entry)
                 suggestion = "Tuotetta ei löytynyt."
-                if len(product_suggestion[1]) > 0:
+                if len(self._suggestions) == 1:
+                    suggestion += " Tarkoititko?"
+                elif len(self._suggestions) > 1:
                     suggestion += " Tarkoititko jotain seuraavista?"
                 self._suggestions.insert(0, suggestion)
+                self._radiobutton_department.set(None)
 
         self._suggestions_frame.destroy()
         self._pack_suggestions_frame()
@@ -139,18 +142,22 @@ class EnterItemsFrame:
         department_valid = self._check_department_selection_validity()
 
         if entry_valid and amount_valid and department_valid:
+            product_entry = self._entry_text.get().lower()
             amount_entry = int(self._entry_amount.get())
-            product_suggestion = self._shopping_list_service.find_product(
-                self._entry_text.get())
-            if product_suggestion[0]:
-                product = product_suggestion[1]
+            selected_department = self._find_department_from_selection(
+                self._radiobutton_department.get())
+            product_in_repository = self._shopping_list_service.find_product(
+                product_entry)
+
+            if product_in_repository and product_in_repository.department == selected_department:
+                product = product_in_repository
             else:
-                department = self._find_department_from_selection(
-                    self._radiobutton_department.get())
                 product = self._shopping_list_service.create_new_product(
-                    self._entry_text.get(), department)
+                    product_entry, selected_department)
+
             self._shopping_list_service.add_product_to_current_shopping_list(
                 product, amount_entry, self._option_unit.get())
+
             self._display_shopping_list_changes()
             self._entry_text.set("")
             self._entry_amount.set("")
@@ -174,9 +181,12 @@ class EnterItemsFrame:
     def _check_amount_entry_validity(self):
         amount_entry = self._entry_amount.get()
         try:
-            int(amount_entry)
+            amount_entry = int(amount_entry)
         except:
             self._suggestions.append("Käytä määräkentässä vain numeroita.")
+            return False
+        if amount_entry == 0:
+            self._suggestions.append("Lisää määrä.")
             return False
         return True
 
