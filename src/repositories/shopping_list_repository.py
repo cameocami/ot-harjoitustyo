@@ -1,4 +1,5 @@
 from pathlib import Path
+from startfile import startfile
 from config import SHOPPING_LIST_PATH
 
 
@@ -20,6 +21,7 @@ class ShoppingListRepository:
         self._ensure_file_exists()
         with open(self._file_path, mode="w", encoding="utf-8") as shopping_list_file:
             shopping_list_file.write(text)
+        startfile(self._file_path)
 
     def _sort_products(self, department_order_in_store: list, shopping_list: dict):
         departments_with_list_of_products = []

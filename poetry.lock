@@ -439,6 +439,18 @@ files = [
 ]
 
 [[package]]
+name = "universal-startfile"
+version = "0.2"
+description = "A cross-platform version of 'os.startfile' from the standard library."
+category = "main"
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "universal-startfile-0.2.tar.gz", hash = "sha256:1e970e782de10e726ebde2ae8887469d93a75eb67f81b82633979c11739a212a"},
+    {file = "universal_startfile-0.2-py3-none-any.whl", hash = "sha256:dc1de2c595f7897609fe319bd5da764043e637db8e32d572ec94fa3589f49df0"},
+]
+
+[[package]]
 name = "wrapt"
 version = "1.15.0"
 description = "Module for decorators, wrappers and monkey patching."
@@ -526,4 +538,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "4a5a7244d01ba8b12f3dd495e4e59230cf6551d2eea856529faab402bab4781d"
+content-hash = "6fb5b6680c9988a1316b22e5da78f2a3fe1fdf877d169ebd9f06e547bc8e5a81"
