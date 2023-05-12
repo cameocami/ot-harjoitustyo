@@ -1,4 +1,17 @@
 
+
+class InvalidProductEntry:
+    pass
+
+
+class InvalidAmountEntry:
+    pass
+
+
+class InvalidDepartmentSelection:
+    pass
+
+
 class ShoppingListService:
 
     def __init__(self, product_repository, store_repository, shopping_list_repository):
