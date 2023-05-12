@@ -28,24 +28,24 @@ class MainView:
         Args:
             root (Tk): Tkinter-window into which the user interface is initialized 
         """
-        self._shopping_list_service = ShoppingListService(
+        self.shopping_list_service = ShoppingListService(
             ProductRepository(), StoreRepository(), ShoppingListRepository())
-        self._root = root
-        self._options_frame = None
-        self._shopping_list_frame = None
-        self._enter_items_frame = None
+        self.root = root
+        self.options_frame = None
+        self.shopping_list_frame = None
+        self.enter_items_frame = None
 
     def display(self):
         """ Displays the mainview."""
 
-        self._options_frame = OptionsFrame(
-            self._root, self._shopping_list_service)
-        self._options_frame.pack()
+        self.options_frame = OptionsFrame(
+            self.root, self.shopping_list_service)
+        self.options_frame.pack()
 
-        self._shopping_list_frame = ShoppingListFrame(
-            self._root, self._shopping_list_service)
-        self._shopping_list_frame.pack()
+        self.shopping_list_frame = ShoppingListFrame(
+            self.root, self.shopping_list_service)
+        self.shopping_list_frame.pack()
 
-        self._enter_items_frame = EnterItemsFrame(
-            self._root, self._shopping_list_service, self._shopping_list_frame.pack)
-        self._enter_items_frame.pack()
+        self.enter_items_frame = EnterItemsFrame(
+            self.root, self.shopping_list_service, self.shopping_list_frame.pack)
+        self.enter_items_frame.pack()

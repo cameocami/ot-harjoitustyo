@@ -10,6 +10,9 @@ def main():
     ui_view = MainView(window)
     ui_view.display()
 
+    window.bind('<Return>', lambda event: ui_view.enter_items_frame._search_product_button_handler())
+    window.bind('<Control-Return>', lambda event: ui_view.enter_items_frame._add_product_button_handler())
+
     window.mainloop()
 
 

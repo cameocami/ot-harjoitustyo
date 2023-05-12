@@ -30,7 +30,8 @@ class EnterItemsFrame:
     def __init__(self, root, shopping_list_service: ShoppingListService, display_shopping_list_changes):
         self._shopping_list_service = shopping_list_service
 
-        self._frame = ttk.Frame(master=root)
+        self._root = root
+        self._frame = ttk.Frame(master=self._root)
         self._entry_frame = None
         self._product_suggestions_frame = None
         self._departments_frame = None
@@ -181,7 +182,7 @@ class EnterItemsFrame:
         if self._error_messages_frame:
             self._error_messages_frame.destroy()
 
-    def _search_product_button_handler(self):
+    def search_product_button_handler(self):
         self._product_suggestions = []
         self._error_messages = []
 
@@ -214,7 +215,7 @@ class EnterItemsFrame:
 
         self.pack()
 
-    def _add_product_button_handler(self):
+    def add_product_button_handler(self):
 
         self._product_suggestions = []
         self._error_messages = []
