@@ -286,11 +286,14 @@ class EnterItemsFrame:
 
     def _check_amount_entry_validity(self):
         amount_entry = self._entry_amount_var.get()
-        if int(amount_entry) == 0 or len(amount_entry) == 0:
+        if len(amount_entry) == 0:
             self._error_messages.append("Lisää määrä.")
             return False
         try:
             amount_entry = int(amount_entry)
+            if int(amount_entry) == 0:
+                self._error_messages.append("Lisää määrä.")
+                return False
         except:
             self._error_messages.append("Käytä määräkentässä vain numeroita.")
             return False

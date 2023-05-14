@@ -12,12 +12,13 @@ class ShoppingListRepository:
         products_under_departments = self._sort_products(
             department_order_in_store, shopping_list)
         for department in products_under_departments:
-            text += f'{department[0].capitalize()}\n\n'
-            for product in department[1]:
-                text += f' - {product[0]}, '
-                text += self._amount_str_from_amount_dict(product[1])
+            if len(department[1]) > 0:
+                text += f'{department[0].capitalize()}\n\n'
+                for product in department[1]:
+                    text += f' - {product[0]}, '
+                    text += self._amount_str_from_amount_dict(product[1])
+                    text += "\n"
                 text += "\n"
-            text += "\n"
         self._ensure_file_exists()
         with open(self._file_path, mode="w", encoding="utf-8") as shopping_list_file:
             shopping_list_file.write(text)
