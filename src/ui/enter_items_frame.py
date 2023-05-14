@@ -40,7 +40,6 @@ class EnterItemsFrame:
 
         self._entry_text_var = StringVar()
         self._product_entry_widget = None
-        # self._entry_text_var.set("Lisää tuote kauppalistalle")
 
         self._entry_amount_var = StringVar()
         self._amount_entry_widget = None
