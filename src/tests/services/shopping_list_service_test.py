@@ -17,7 +17,9 @@ class FakeProductRepository:
             Product("jogurtti", "maitotuotteet"),
             Product("kermaviili", "maitotuotteet"),
             Product("kuohukerma", "maitotuotteet"),
-            Product("ruisleipä", "leipä")
+            Product("ruisleipä", "leipä"),
+            Product("korvapuusti", "leipä"),
+            Product("korvapuusti", "pakaste")
         ]
 
     def get_products(self):
@@ -66,69 +68,87 @@ class TestShoppingListService(unittest.TestCase):
         self.assertEqual(department_order_in_store[1], "leipä")
         self.assertEqual(department_order_in_store[2], "maito")
 
-    def test_find_product_with_exact_spelling(self):
+    def test_find_product_with_exact_spelling_no_department(self):
         product_suggestion = self.shopping_list_service.find_product("omena")
 
-        self.assertEqual(product_suggestion[0], True)
-        self.assertEqual(product_suggestion[1].name, "omena")
-        self.assertEqual(product_suggestion[1].department, "hevi")
+        self.assertEqual(len(product_suggestion), 1)
+        self.assertEqual(product_suggestion[0].name, "omena")
+        self.assertEqual(product_suggestion[0].department, "hevi")
 
-    def test_find_product_with_partial_entry(self):
-        product_suggestions = self.shopping_list_service.find_product("mena")
+    def test_find_product_with_exact_spelling_correct_department(self):
+        product_suggestion = self.shopping_list_service.find_product("korvapuusti", "pakaste")
 
-        self.assertEqual(product_suggestions[0], False)
-        self.assertEqual(len(product_suggestions[1]), 3)
-        self.assertEqual(product_suggestions[1][0].name, "omena")
-        self.assertEqual(product_suggestions[1][1].name, "granaattiomena")
-        self.assertEqual(product_suggestions[1][2].name, "omenarahka")
+        self.assertEqual(len(product_suggestion), 1)
+        self.assertEqual(product_suggestion[0].name, "korvapuusti")
+        self.assertEqual(product_suggestion[0].department, "pakaste")
 
-    def test_find_product_with_overextended_entry(self):
-        product_suggestions = self.shopping_list_service.find_product(
+    def test_find_product_with_exact_spelling_several_departments(self):
+        product_suggestion = self.shopping_list_service.find_product("korvapuusti")
+
+        self.assertEqual(len(product_suggestion), 2)
+        self.assertEqual(product_suggestion[0].name, "korvapuusti")
+        self.assertEqual(product_suggestion[0].department, "leipä")
+        self.assertEqual(product_suggestion[1].name, "korvapuusti")
+        self.assertEqual(product_suggestion[1].department, "pakaste")
+
+    def test_form_suggestions_with_exact_spelling(self):
+        product_suggestion = self.shopping_list_service.form_product_suggestions("omena")
+
+        self.assertEqual(len(product_suggestion), 4)
+        self.assertEqual(product_suggestion[0].name, "omena")
+        self.assertEqual(product_suggestion[0].department, "hevi")
+
+
+    def test_form_suggestions_with_partial_entry(self):
+        product_suggestions = self.shopping_list_service.form_product_suggestions("mena")
+
+        self.assertEqual(len(product_suggestions), 3)
+        self.assertEqual(product_suggestions[0].name, "omena")
+        self.assertEqual(product_suggestions[1].name, "granaattiomena")
+        self.assertEqual(product_suggestions[2].name, "omenarahka")
+
+    def test_form_suggestions_with_overextended_entry(self):
+        product_suggestions = self.shopping_list_service.form_product_suggestions(
             "granny smith omena")
 
-        self.assertEqual(product_suggestions[0], False)
-        self.assertEqual(len(product_suggestions[1]), 1)
-        self.assertEqual(product_suggestions[1][0].name, "omena")
+        self.assertEqual(len(product_suggestions), 1)
+        self.assertEqual(product_suggestions[0].name, "omena")
 
-    def test_find_product_with_one_double_character(self):
-        product_suggestions = self.shopping_list_service.find_product("omenna")
+    def test_form_suggestions_with_one_double_character(self):
+        product_suggestions = self.shopping_list_service.form_product_suggestions("omenna")
 
-        self.assertEqual(product_suggestions[0], False)
-        self.assertEqual(len(product_suggestions[1]), 1)
-        self.assertEqual(product_suggestions[1][0].name, "omena")
+        self.assertEqual(len(product_suggestions), 1)
+        self.assertEqual(product_suggestions[0].name, "omena")
 
-    def test_find_product_with_one_random_character_too_many(self):
-        product_suggestions = self.shopping_list_service.find_product("omebna")
+    def test_form_suggestions_with_one_random_character_too_many(self):
+        product_suggestions = self.shopping_list_service.form_product_suggestions("omebna")
 
-        self.assertEqual(product_suggestions[0], False)
-        self.assertEqual(len(product_suggestions[1]), 1)
-        self.assertEqual(product_suggestions[1][0].name, "omena")
+        self.assertEqual(len(product_suggestions), 1)
+        self.assertEqual(product_suggestions[0].name, "omena")
 
-    def test_find_product_with_one_character_missing(self):
-        product_suggestions = self.shopping_list_service.find_product("omna")
+    def test_form_suggestions_with_one_character_missing(self):
+        product_suggestions = self.shopping_list_service.form_product_suggestions("omna")
 
-        self.assertEqual(product_suggestions[0], False)
-        self.assertEqual(len(product_suggestions[1]), 1)
-        self.assertEqual(product_suggestions[1][0].name, "omena")
+        self.assertEqual(len(product_suggestions), 1)
+        self.assertEqual(product_suggestions[0].name, "omena")
 
-    def test_find_product_with_one_character_misspelt(self):
-        product_suggestions = self.shopping_list_service.find_product("omina")
+    def test_form_suggestions_with_one_character_misspelt(self):
+        product_suggestions = self.shopping_list_service.form_product_suggestions("omina")
 
-        self.assertEqual(product_suggestions[0], False)
-        self.assertEqual(len(product_suggestions[1]), 1)
-        self.assertEqual(product_suggestions[1][0].name, "omena")
+        self.assertEqual(len(product_suggestions), 1)
+        self.assertEqual(product_suggestions[0].name, "omena")
+        self.assertEqual(product_suggestions[0].department, "hevi")
 
-    def test_find_product_with_too_many_suggestions(self):
-        product_suggestions = self.shopping_list_service.find_product("")
+    def test_form_suggestions_with_too_many_suggestions(self):
+        product_suggestions = self.shopping_list_service.form_product_suggestions("")
 
-        self.assertEqual(product_suggestions[0], False)
-        self.assertEqual(len(product_suggestions[1]), 10)
+        self.assertEqual(len(product_suggestions), 10)
 
-    def test_find_product_when_no_suggestions(self):
-        product_suggestions = self.shopping_list_service.find_product(
+    def test_form_suggestions_when_no_suggestions(self):
+        product_suggestions = self.shopping_list_service.form_product_suggestions(
             "selleri")
 
-        self.assertEqual(product_suggestions, (False, []))
+        self.assertEqual(product_suggestions, [])
 
     def test_create_new_product(self):
         product = self.shopping_list_service.create_new_product(
@@ -207,3 +227,11 @@ class TestShoppingListService(unittest.TestCase):
             "g": 0,
             "kg": 0,
         })
+
+    def test_empty_shopping_list(self):
+        product = Product("makaronilaatikko", "valmisruoka")
+        self.shopping_list_service.add_product_to_current_shopping_list(product, 1, "kpl")
+
+        self.shopping_list_service.empty_shopping_list()
+
+        self.assertEqual(self.shopping_list_service.get_current_shopping_list(), {})

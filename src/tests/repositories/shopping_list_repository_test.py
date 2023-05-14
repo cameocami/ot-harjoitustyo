@@ -23,4 +23,4 @@ class TestShoppingListRepository(unittest.TestCase):
             department_order_in_store, shopping_list)
         with open(self.shopping_list_repository._file_path, mode="r", encoding="utf-8") as shopping_list_file:
             self.assertEqual(shopping_list_file.read(
-            ), "Kauppalista\n\nHevi\n\n - Kiivi, 1 kpl + 3 kg\n\nLeipä\n\n\nMaito\n\n\n")
+            ), "Kauppalista\n\nHevi\n\n - Kiivi, 1 kpl + 3 kg\n\n")
