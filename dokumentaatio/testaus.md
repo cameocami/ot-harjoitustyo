@@ -14,17 +14,18 @@ Repositorio-luokkia `ProductRepository` ja `StoreRepository` testattiin erillisi
 
 #### Testauskattavuus
 
-Käyttöliittymäkerrosta lukuunottamatta sovelluksen testauksen haarautumakattavuus on x%
+Käyttöliittymäkerrosta lukuunottamatta sovelluksen testauksen haarautumakattavuus on 96%.
 
 ![](./kuvat/testikattavuus.png)
+
+Testaamtta jäi:
+ - tilanteet, jossa tiedoston ympäristöä ei löytynyt.
+ - Store_repository:n tiedostonluku ominaisuus
+ - Tekstitiedoston avaus käyttöjärjestelmän oletussovelluksella
 
 ### Järjestelmätestaus
 
 Sovelluksen järjestelmätestaus on suoritettu manuaalisesti.
-
-#### Asennus ja konfigurointi
-
-Sovellus on haettu ja asennettu [käyttöohjeen](./kayttoohje.md) kuvaamalla tavalla sekä Windows- että Linux-ympäristöön.
 
 #### Toiminnallisuudet
 
