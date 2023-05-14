@@ -47,3 +47,4 @@ Perusversion jälkeen sovellusta voidaan täydentää esim. seuraavilla toiminna
 - Osastojen järjestely mahdollisuus - käyttäjä voi järjestellä ruokakaupan osastot uuteen järjestykseen tai luoda kauppoja, joissa osastot ovat eri järjestyksessä
 - Suosikkituotteiden valinta - käyttäjä voi valita suosikkituotteensa tuotetietokannasta
 - Reseptien luonti - Käyttäjä voi luoda reseptejä, jolla käyttäjä saa lisättyä kaikki reseptin ainesosat kauppalistalle
+- Käyttöliittymän jalostus - Käyttöliittymän ilme ja toiminnallisuudet tukevat parempaa käyttäjäkokemusta
