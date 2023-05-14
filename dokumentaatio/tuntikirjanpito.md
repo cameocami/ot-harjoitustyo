@@ -16,4 +16,6 @@
 | 9.5.  | 3    | Poista-painikkeiden lisääminen käyttöliittymään |  
 | 10.5.  | 5    | Pylint korjauksia, ylimääräisen luokan poistaminen, kauppalista-repositorion luominen ja virheidenkäsittelyn lisääminen |
 | 11.5.  | 2    | Testikattavuuden lisääminen |
-| yht   | 52   | | 
+| 12.5.  | 6    | Tuplatuotteiden lisäyksen korjaus, käyttöliittymän muokkaaminen käyttäjäystävällisemmäksi, tiedoston avaus "Laadi kauppalista"-toimintoon |
+| 14.5.  | 6    | Dokumentaation tekeminen, muutamien bugien korjaus, testikattavuuden lisääminen |
+| yht   | 64   | | 
