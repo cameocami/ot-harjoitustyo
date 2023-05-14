@@ -1,6 +1,6 @@
 # Kauppalista app 
 
-Sovelluksen avulla käyttäjä voi luoda kauppalistan haluamistaan ruokakaupan tuotteista. Valmis kauppalista, jossa tuotteet ovat osastoittain siinä järjestyksessä kun ne esiintyvät kaupssa tallentuu juurikansioon nimellä kauppalista.txt. Sovelluksessa käyttäjä voi käyttää tietokannan tuotteita, tai luoda uusia tuotteita kirjoittamalla niille nimen ja valitsemalla niille osaston.  
+Sovelluksen avulla käyttäjä voi luoda kauppalistan haluamistaan ruokakaupan tuotteista. Valmis kauppalista, jossa tuotteet ovat osastoittain siinä järjestyksessä kun ne esiintyvät kaupassa tallentuu paikalliskansioon. Käyttäjä voi käyttää jo tietokannasta löytyviä tuotteita tai luoda uusia tuotteita kirjoittamalla niille nimen ja valitsemalla niille osaston.
 
 ## Komentorivitoiminnot
 
@@ -46,9 +46,9 @@ poetry run invoke lint
 ```
 ## Dokumentaatio
 
-- [Käyttöohje (tyhjä)](./dokumentaatio/kayttoohje.md)
+- [Käyttöohje](./dokumentaatio/kayttoohje.md)
 - [Vaatimusmäärittely](./dokumentaatio/vaatimusmaarittely.md)
 - [Arkkitehtuurikuvaus](./dokumentaatio/arkkitehtuuri.md)
-- [Testausdokumentti (tyhjä)](./dokumentaatio/testaus.md)
+- [Testausdokumentti](./dokumentaatio/testaus.md)
 - [Työaikakirjanpito](./dokumentaatio/tuntikirjanpito.md)
 - [Changelog](./dokumentaatio/changelog.md)
