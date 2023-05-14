@@ -16,7 +16,7 @@ Käyttöliittymässä on yksi näkymä, joka on jaoteltu kolmeen osioon:
 - Kauppalista 
 - Tuotteiden lisäys
 
-<img src="https://github.com/cameocami/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/K%C3%A4ytt%C3%B6liittym%C3%A4_osiot.png" alt="Käyttöliittymän osiot" width="25%" height="25%" />
+<img src="https://github.com/cameocami/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/K%C3%A4ytt%C3%B6liittym%C3%A4_osiot.png" alt="Käyttöliittymän osiot" width="75%" height="75%" />
 
 
 Kukin näistä on toteutettu omana luokkanaan. UI-luokka vastaa osioiden pakkaamisesta järjestyksessä. Käyttöliittymä on pyritty eristämään täysin sovelluslogiikasta. Käyttöliittymä kutsuu ShoppingListService-luokan metodeja.
@@ -53,7 +53,7 @@ Repositories-pakkauksessa sijatsevat ProductRepository, ShoppingListRepository j
 
 Ohessa pakkauskaavio, joka kuvaa ShoppingListService-luokan suhdetta ohjelman muihin osiin:
 
-<img src="https://github.com/cameocami/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/" alt="ShoppingListService-luokan suhteet" width="25%" height="25%" />
+<img src="https://github.com/cameocami/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/shoppinglistservice_pakkauskaavio.png" alt="ShoppingListService-luokan suhteet" width="75%" height="75%" />
 
 
 ### Tietojen pysyväistallennus
