@@ -59,7 +59,7 @@ Tyhjennä kauppalista painamalla "Tyhjennä kauppalista"-painiketta.
 
 Luo kauppalistasta tekstitiedosto painamalla "Laadi kauppalista"-painiketta. Ohjelma luo kauppalistasta tiedoston, jossa on listattuna kaikki kauppalistan tuotteet siinä järjestyksessä kuin ne löytyvät kaupassa. Tiedosto tulee data-kansion alle. Ohjelma avaa kyseisen tiedoston käyttöjärjestelmän oletusohjelmalla.
 
-
+![](./kuvat/kauppalista_tiedosto.png)
 
 
 
