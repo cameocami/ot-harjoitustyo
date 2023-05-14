@@ -2,42 +2,48 @@
 
 ## Sovelluksen tarkoitus
 
-Sovelluksen avulla käyttäjä voi luoda itselleen kauppalistan ruokakaupan tuotteista. 
+Sovelluksen avulla käyttäjä voi luoda kauppalistan haluamistaan ruokakaupan tuotteista. Valmis kauppalista, jossa tuotteet ovat osastoittain siinä järjestyksessä kun ne esiintyvät kaupassa tallentuu paikalliskansioon. Käyttäjä voi käyttää jo tietokannasta löytyviä tuotteita tai luoda uusia tuotteita kirjoittamalla niille nimen ja valitsemalla niille osaston.
 
 
-## Käyttöliittymäluonnos (osin tehty)
+## Käyttöliittymäluonnos
 
-Käyttöliittymä koostuu yhdestä näkymästä, johon sovellus aukeaa, kun se käynnistetään. (tehty) Kyseinen näkymä sisältää kaikki sovelluksen toiminnalisuudet. (tehty)
-
+Käyttöliittymä koostuu yhdestä näkymästä, johon sovellus aukeaa, kun se käynnistetään. Kyseinen näkymä sisältää kaikki sovelluksen toiminnalisuudet.
 
 ![](./kuvat/kayttoliittyma-hahmotelma.png)
 
-Sovelluksen käyttöliittymän lisäksi sovellus luo html-tiedostoja valmiista kauppalistoista. Nämä tallentuvat paikallisesti sovelluksen kansioon.
-
+Sovelluksen käyttöliittymän lisäksi sovellus luo tekstitiedostoja kauppalistoista. Nämä tallentuvat paikallisesti sovelluksen kansioon.
 
 ## Perusversion tarjoama toiminnallisuus
 
-### Tuotteen lisääminen kauppalistalle (tehty)
+### Tuotteen hakeminen
 
-Käyttäjä kirjoittaa kirjoituskenttään haluamansa tuotteen ja määrän, sekä valitsee pudotusvalikosta määräyksikön. (tehty) Jos kyseinen on tuote on sovelluksen tuotetietokannassa, valitsee sovellus tuotteelle sille määritellyn osaston. (tehty) Jos tuote ei löydy sovelluksen tuotetietokannasta, käyttäjän valitsee tuottelle osaston. (tehty)
+Käyttäjä voi hakea tuotetta tietokannasta kirjoittamalla tuotekenttään tuotteen nimen tai osan siitä, ja painamalla joko Enter-näppäintä tai "Etsi"-painiketta. Jos täysin samanniminen tuote löytyy tietokannasta ja vain yhdeltä osastolta, sovellus ilmoittaa käyttäjälle, että tuote löytyi ja valitsee oikean osaston tuotteelle.
 
-Käyttäjä lisää tuotteen kauppalistalle painamalla "lisää"-painiketta. (tehty) Mikäli tuotetta ei löytynyt sovelluksen tuotetietokannasta, lisätään tuotteen nimi ja sen osasto myös tuotetietokantaan. (tehty) Mikäli tuote on jo kauppalistalla, tuotteen lisääminen kasvattaa tuotteen määrää. (tehty)
+Jos tietokannasta löytyy tuotteita, joiden nimi osin täsmää syötettyyn tuotenimeen tai tuote löytyy useammalta eri osastolta, sovellus ehdottaa käyttäjälle näitä tuotteita. Jos käyttäjä painaa tuote-ehdotuksia, sovellus täyttää kyseisen tuotteen koko nimen ja osaston syötekenttiin käyttäjän puolesta.
+
+Jos mitään vastaavaa tuotetta ei löydy tietokannasta, sovellus ilmoittaa käyttäjälle ettei tuotetta löytynyt. 
+
+### Tuotteen lisääminen kauppalistalle
+
+Kun käyttäjä on täyttänyt kirjoituskenttään haluamansa tuotteen nimen ja määrän, sekä valinnut pudotusvalikosta määräyksikön, voi hän lisätä tuotteen kauppalistalle Enter+Control-näppäimillä tai "Lisää"-painikkeella.
+
+Mikäli tuote on jo kauppalistalla, tuotteen lisääminen kasvattaa tuotteen valitun yksikön määrää.
+
+Kun käyttäjä lisää tuotteen kauppalistalle, jos tuotetta ei jo löydy sovelluksen tuotetietokannasta, tallentaa sovellus tuotteen tietokantaan. 
 
 ### Tuotteiden hallinointi kauppalistalla
 
-Kun tuotteita on lisätty kauppalistalle, voi käyttäjä vielä muokata haluttua määrää. Painamalla "-" tai "+" -painikkeita, käyttäjä pystyy vähentämään tai lisäämään haluttua tuotteen määrää. Painamalla "poista"-painiketta, käyttäjä voi poistaa tuotteen kauppalistalta. 
+Kun tuotteita on lisätty kauppalistalle, voi käyttäjä poistaa tuotteita "x"-painikkeilla, jotka ovat kunkin tuotteen vieressä. Jos kaikki määrät tuotetta poistetaan, tuote poistuu kauppalistalta.
 
-### Kauppalista tiedosto kokoaminen (osin tehty)
+### Kauppalista tiedosto kokoaminen
 
-Kun käyttäjä on valmis kauppalistan kanssa, "laadi kauppalista"-painike kokoaa listan tuotteet html-tiedostoon. (osin tehty, tiedosto toteutettu txt-tiedostona)
+Kun käyttäjä haluaa kauppalistan tiedostona ulos ohjelmasta, "laadi kauppalista"-painike kokoaa listan tuotteet tekstitiedostoon. Tiedostossa tuotteet ovat joateltu osastojen mukaan ja osastot järjetetty siihen järjetykseen kuin ne esiintyvät oletusruokakaupassa. "Laadi kauppalista"-painike avaa myös kyseisen tiedoston käyttöjärjestelmän oletussovelluksella tekstitiedostoille.
 
 ## Jatkokehitysideoita
 
 Perusversion jälkeen sovellusta voidaan täydentää esim. seuraavilla toiminnallisuuksilla, mikäli aika sallii:
 
-- Kauppalistan tyhjennys - käyttäjä voi poistaa kaikki tuotteet kauppalistalta.
-- Kauppalistan järjestely - käyttäjä voi valita minkä perusteella tuotteet järjestellään kauppalistaan.
-- Oikoluku - Sovellus ehdottaa tuotetietokannasta löytyvää tuotteen nimeä, jos kirjoitettu tuotteen nimi on muutaman kirjaimen päässä tietokannasta löytyvästä nimestä. (tehty)
-- Osastojen järjestely mahdollisuus - käyttäjä voi järjestellä ruokakaupan osastot uuteen järjestykseen
+- Kauppalistan järjestely - käyttäjä voi valita minkä perusteella tuotteet järjestellään kauppalistaan ja/tai sovellusnäkymässä
+- Osastojen järjestely mahdollisuus - käyttäjä voi järjestellä ruokakaupan osastot uuteen järjestykseen tai luoda kauppoja, joissa osastot ovat eri järjestyksessä
 - Suosikkituotteiden valinta - käyttäjä voi valita suosikkituotteensa tuotetietokannasta
 - Reseptien luonti - Käyttäjä voi luoda reseptejä, jolla käyttäjä saa lisättyä kaikki reseptin ainesosat kauppalistalle
