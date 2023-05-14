@@ -290,7 +290,7 @@ class EnterItemsFrame:
             return False
         try:
             amount_entry = int(amount_entry)
-            if int(amount_entry) == 0:
+            if int(amount_entry) < 1:
                 self._error_messages.append("Lisää määrä.")
                 return False
         except:
